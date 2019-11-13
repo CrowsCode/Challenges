@@ -35,8 +35,7 @@ public class MultiMethods {
 		while (number < 90 || number > 2050) {
 			System.out.println("Please Enter A Number "); // Making it such, that it repeats the same request until the
 															// user inputs a number equals or higher than 65, while
-															// being lower than 2015(total value of all the numbers
-															// combined)
+															// being lower than 2050
 			number = input.nextInt();
 		}
 		int numberOfDifferentCharecters2 = 0;
