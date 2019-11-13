@@ -1,4 +1,4 @@
-((((((((((amash SubClass)))))))))))
+((((((((((amash SubClass))))))))))) بەڵێن عبدالرحمان
 public class SubClass {
 	public int money;
 	public int leftOver;
