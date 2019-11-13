@@ -1,4 +1,4 @@
-
+((((((((((amash SubClass)))))))))))
 public class SubClass {
 	public int money;
 	public int leftOver;
@@ -30,8 +30,6 @@ public class SubClass {
 
 
 ((((((((((amash main class)))))))))))
-
-
 public class Challenge1 {
 
 	public static void main(String[] args) {
