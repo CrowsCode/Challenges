@@ -1,0 +1,79 @@
+((((((((((amash SubClass)))))))))))
+package challenge2;
+
+import java.util.Scanner;
+
+public class MultiMethods {
+	Scanner input = new Scanner(System.in);
+
+	public void method1() {
+		System.out.println("Please Enter A Number ");
+		int number = input.nextInt();
+		while (number < 65 || number > 2015) {
+			System.out.println("Please Enter A Number "); // Making it such, that it repeats the same request until the
+															// user inputs a number equals or higher than 65, while
+															// being lower than 2015(total value of all the numbers
+															// combined)
+			number = input.nextInt();
+		}
+		int numberOfDifferentCharecters = 0;
+		int charr = 65;
+		System.out.println("First Method( which prints from A to Z): ");
+		while (number >= 65) {
+			char charrr = (char) charr;
+			System.out.println(charrr);
+			number = number - charr;
+			charr++;
+			numberOfDifferentCharecters++;
+		}
+		System.out.println("Number Of Different Charecters For Method1= " + numberOfDifferentCharecters + "\n\n");
+	}
+
+	public void method2() {
+		System.out.println("Please Enter A Number For Method2");
+		int number = input.nextInt();
+		while (number < 90 || number > 2050) {
+			System.out.println("Please Enter A Number "); // Making it such, that it repeats the same request until the
+															// user inputs a number equals or higher than 65, while
+															// being lower than 2015(total value of all the numbers
+															// combined)
+			number = input.nextInt();
+		}
+		int numberOfDifferentCharecters2 = 0;
+		int charr = 90;
+		System.out.println("Second Method( which prints from Z to A): ");
+		while (number >= 90) {
+			char charrr = (char) charr;
+			System.out.println(charrr);
+			number = number - charr;
+			charr--;
+			numberOfDifferentCharecters2++;
+		}
+		System.out.println("Number Of Different Charecters For Method2= " + numberOfDifferentCharecters2);
+	}
+
+}
+
+
+
+
+
+((((((((((amash main class)))))))))))
+package challenge2;
+
+import java.util.Scanner;
+
+public class test {
+
+	public static void main(String[] args) {
+
+		MultiMethods m = new MultiMethods();
+		m.method1();
+		m.method2();
+	}
+
+}
+
+
+
+
