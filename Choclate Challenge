@@ -26,3 +26,17 @@ public class SubClass {
 		}
 	}
 }
+
+
+
+((((((((((amash main class)))))))))))
+
+
+public class Challenge1 {
+
+	public static void main(String[] args) {
+		SubClass balen = new SubClass(15);
+		balen.buyBooks();
+		balen.useLeftOver();
+	}
+}
