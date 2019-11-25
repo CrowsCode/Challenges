@@ -1,0 +1,63 @@
+package exam;
+
+import java.util.LinkedList;
+
+public class Exam {
+	static int b = 0;
+
+	public static int jo(int n, int k) { // awai examaka
+		if (n == 1)
+			return 1;
+		else
+			return (jo(n - 1, k) + k - 1) % n + 1;
+	}
+
+
+
+//amayan hi xom
+	public static void joo(int nn, int kk) {// ,,,,,,,int k yaka hich karigari nya ya3ni har la yakam kaso dast pe akat
+											// u daima yakam kas 2am akuzhet boya ya3ni [[[default int k=2;]]]
+
+		LinkedList<Integer> ls = new LinkedList<>();
+		for (Integer i = nn; i > 0; i--) {
+			if (!(i % 2 == 0)) {
+				ls.addFirst(i);
+				System.out.println(ls);
+			}
+		}
+		int ii = 0;
+		if ((nn % 2 == 1)) {
+			while (!(ls.size() == 1)) {
+
+				ls.remove(ii);
+				ii = ii + 1;
+				System.out.println(ls);
+				System.out.println(ii);
+				if (ii >= ls.size() && (ls.size() % 2 == 1)) {
+					ii = 1;
+				}
+
+				if (ii >= ls.size() && (ls.size() % 2 == 0)) {
+					ii = 0;
+				} // wata agar ii==nn+1
+			}
+
+		} else {
+			ii = 1;
+			while (!(ls.size() == 1)) {
+
+				ls.remove(ii);
+				ii = ii + 1;
+				System.out.println(ls);
+				if (ii >= ls.size() && (ls.size() % 2 == 1)) {
+					ii = 1;
+				}
+
+				if (ii >= ls.size() && (ls.size() % 2 == 0)) {
+					ii = 0;
+				} // wata agar ii==nn+1
+			}
+		}
+	}
+
+}
