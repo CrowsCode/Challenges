@@ -1,0 +1,38 @@
+package exam;
+
+import java.util.*;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Exam e = new Exam();
+		doit(10);
+		
+
+	}
+
+	public static void doit(int x) {
+
+		char sig = (char) 198;
+		String sign = Character.toString(sig);
+
+		String space = " ";
+		int ispace = 20;
+		for (int i = 1; i <= x; i++) {
+
+			ispace -= 2;
+			String repeated = new String(new char[i]).replace("\0", sign);
+			String repeateds = new String(new char[ispace]).replace("\0", space);
+			System.out.println(repeated + repeateds + repeated);
+		}
+
+		for (int i = x - 1; i > 0 && i <= x; --i) {
+
+			ispace += 2;
+			String repeated = new String(new char[i]).replace("\0", sign);
+			String repeateds = new String(new char[ispace]).replace("\0", space);
+			System.out.println(repeated + repeateds + repeated);
+		}
+
+	}
+}
