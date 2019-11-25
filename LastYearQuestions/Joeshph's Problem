@@ -39,7 +39,7 @@ public class Exam {
 
 				if (ii >= ls.size() && (ls.size() % 2 == 0)) {
 					ii = 0;
-				} // wata agar ii==nn+1
+				} 
 			}
 
 		} else {
@@ -55,7 +55,7 @@ public class Exam {
 
 				if (ii >= ls.size() && (ls.size() % 2 == 0)) {
 					ii = 0;
-				} // wata agar ii==nn+1
+				} 
 			}
 		}
 	}
