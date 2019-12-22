@@ -1,1 +1,111 @@
 
+import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JOptionPane;
+
+public class Main {
+
+	public static void main(String[] args) throws InterruptedException {
+		int again=1;
+		while(again==1) {
+		try {ResultToSpeech.enteYourNumber();  }
+        catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException e) {   e.printStackTrace();    }
+		int inputTEMPORARY = Integer.parseInt(JOptionPane.showInputDialog( "Enter your number: "))  ;  //la shweni ka bakar nayato   bas bo awaya ka bas zhmara enter kre
+		while(inputTEMPORARY<0 || inputTEMPORARY>1000000000) {
+			try {ResultToSpeech.invalid();   }
+	        catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException e) {   e.printStackTrace();    }
+			JOptionPane.showMessageDialog(null, "invalid");
+			Thread.sleep(1000);
+			try {ResultToSpeech.enteYourNumberAgain();   }
+	        catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException e) {   e.printStackTrace();    }
+			inputTEMPORARY = Integer.parseInt(JOptionPane.showInputDialog( "Enter your number again: "))  ; 
+		}
+		                 
+		String input = String.valueOf(inputTEMPORARY);
+		int inputInt = Integer.parseInt(input);                    // bas bo else if'i ,sfr u 10-19 u 
+		
+		String[] inputArray = input.split("");
+		int inputLen = inputArray.length;
+		
+		String numberString="";
+		int numberInt =0;
+		String result="";
+		int thousand_5digit=0;
+		int million_8digit=0;
+		
+		if(input.length()>5) {  // bo awaya ka agar 11200 bu  na nuset sad u aw u 2 hazar  amash bawai ka input aka bkat ba 5 digit u inja serkre bzanre
+			thousand_5digit = Integer.parseInt(input.substring(input.length() -5, input.length() )) ;   // aya aw 5 digita rangei 10,000-19,000 tyaya yan na 
+		}if(input.length()>8) {
+			million_8digit = Integer.parseInt(input.substring(input.length() -8, input.length() )) ;   // har haman shi sarawa
+		}
+		for(int i= inputLen-1;     i>=0;    i--     ) {
+			numberString =inputArray[i]+ numberString ;
+			numberInt = Integer.parseInt(numberString);
+			
+			if(input.equals("0")) {
+				result="sfr";
+				break;
+			}if(input.equals("1000000000")) {
+				result="yak billion";
+				break;			
+			}if(numberInt>= 10 && numberInt<20){
+				result=	Method.convert_ten_to_ninteen(numberInt);	 
+				 if(inputInt>=10 && inputInt<20) {result=result+"u ";  break;}  //(("u ")) tanha bo awaya ka la axira result 2 char i axiri substring akret 
+	    	}                                                                  // wa if aka bo awaya agar bas 10-19 ba tanya nusra bn nachet bnuse  ((u yanza))
+			
+			 if((thousand_5digit>= 10000 && thousand_5digit<20000)) {                 
+		    	if(numberInt>= 1000 && numberInt<10000) {             
+	     		continue;  
+		    	}}
+	    	if ((million_8digit>= 10000000 && million_8digit<20000000)) {               
+		    	if(numberInt>= 1000000 && numberInt<10000000) {              
+		     		continue;                                                            	
+		    	}}
+			result=Method.convert(numberInt)+"u "+result;	
+		}
+		
+		// agar zhmaraka la chan hazarek zyatr bet bo nmuna 200,000 awa 3 jar anuset "hazar" boya yak ba yak hazarakan asrino
+		int indexofHazar1 = result.indexOf("hazar");                    //1) 
+		String substringResultHazar1 = result.substring(indexofHazar1+1);    //2)
+		if(substringResultHazar1.contains("hazar")) {                        //3)      
+			result=result.replaceFirst("hazar","");                     //4) hazar'i yakam 
+			
+			int indexofHazar2 = result.indexOf("hazar");                         //1)
+			String substringResultHazar2 = result.substring(indexofHazar2+1);         //2)
+			if(substringResultHazar2.contains("hazar")) {                             //3)
+				result=result.replaceFirst("hazar","");  }                       //4)hazar'i dwam
+		}
+		
+		
+		// agar zhmaraka la chan millionek zyatr bet bo nmuna 200,000,000 awa 3 jar anuset "million" boya yak ba yak millionakan asrino
+				int indexofMillion1 = result.indexOf("million");                    //1) 
+				String substringResultMillion1 = result.substring(indexofMillion1+1);    //2)
+				if(substringResultMillion1.contains("million")) {                        //3)      
+					result=result.replaceFirst("million","");                     //4) millioni yakam 
+					
+					int indexofMillion2 = result.indexOf("million");                         //1)
+					String substringResultMillion2 = result.substring(indexofMillion2+1);         //2)
+					if(substringResultMillion2.contains("million")) {                             //3)
+						result=result.replaceFirst("million","");  }                    //4)millioni dwam
+		}
+				
+			if(result.lastIndexOf("u") <result.length()-2) {
+		    //do nothing here,,, for number which have 10-19 inside them, before adding this if-else ex 212 would have returned " dw sad u dwanz" not "dwanza"
+        	}else {   result=result.substring(0, result.length()-2); }  // bo srinawai "u" axir agar 22 bet awa wallam ama abu"bist u dw u"
+			
+		    if (result.contains("u u")) {                   //[1] am 2 line'a bo srinawai "u u" drustbu la kati habuni 10-19 
+			result=result.replace("u u ", "u ");    }    //[2]
+		
+		    
+		    JOptionPane.showMessageDialog(null,"The conversion of ("+input+") is [ "+ result+"]");
+		try {ResultToSpeech.play(result);   }
+        catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException e) {   e.printStackTrace();    }
+		
+		again = Integer.parseInt(JOptionPane.showInputDialog( "If you want to enter another number, Press(1).\nPress anyother number to Exit"));	
+		}
+		
+	
+	}
+	}
+
