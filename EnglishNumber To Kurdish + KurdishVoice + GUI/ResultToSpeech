@@ -1,0 +1,246 @@
+
+import java.io.*;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+
+class ResultToSpeech {
+
+	public static void play(String result) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		
+		String[] resultArray = result.split(" ");
+		for(int i=0;  i<resultArray.length;  i++) {
+			if(resultArray[i].equals("sfr")) { zero();    }
+			if(resultArray[i].equals("yak billion")) { oneBillion();    }
+			if(resultArray[i].equals("u")) { u();    }
+			if(resultArray[i].equals("sad")) { hundred();    }
+			if(resultArray[i].equals("hazar")) { thousand();    }
+			if(resultArray[i].equals("million")) { million();    }
+			if(resultArray[i].equals("yak")) { one();    }
+			if(resultArray[i].equals("dw")) { two();    }
+			if(resultArray[i].equals("se")) { three();    }
+			if(resultArray[i].equals("chwar")) { four();    }
+			if(resultArray[i].equals("penj")) { five();    }
+			if(resultArray[i].equals("shash")) { six();    }
+			if(resultArray[i].equals("7awt")) { seven();    }
+			if(resultArray[i].equals("hasht")) { eight();    }
+			if(resultArray[i].equals("no")) { nine();    }
+			if(resultArray[i].equals("da")) { ten();    }
+			if(resultArray[i].equals("yanza")) { eleven();    }
+			if(resultArray[i].equals("dwanza")) { twelve();    }
+			if(resultArray[i].equals("siyanza")) { thirteen();    }
+			if(resultArray[i].equals("chwarda")) { fourteen();    }
+			if(resultArray[i].equals("panza")) { fifteen();    }
+			if(resultArray[i].equals("shanza")) { sixteen();    }
+			if(resultArray[i].equals("7ava")) { seventeen();    }
+			if(resultArray[i].equals("hazhda")) { eighteen();    }
+			if(resultArray[i].equals("nozda")) { nineteen();    }
+			
+			if(resultArray[i].equals("bist")) { twenty();    }
+			if(resultArray[i].equals("si")) { thirty();    }
+			if(resultArray[i].equals("chl")) { fourty();    }
+			if(resultArray[i].equals("panja")) { fifty();    }
+			if(resultArray[i].equals("shast")) { sixty();    }
+			if(resultArray[i].equals("7afta")) { seventy();    }
+			if(resultArray[i].equals("hashta")) { eighty();    }
+			if(resultArray[i].equals("nawa")) { ninety();    }
+			
+			
+		}
+		
+
+		
+	}
+	public static void u() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\u.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(500);    }
+
+
+	public static void one() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\1.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void two() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\2.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void three() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\3.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void four() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\4.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void five() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\5.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void six() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\6.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void seven() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\7.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void eight() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\8.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void nine() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\9.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void ten() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\10.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void eleven() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\11.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void twelve() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\12.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void thirteen() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\13.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void fourteen() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\14.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void fifteen() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\15.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void sixteen() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\16.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void seventeen() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\17.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void eighteen() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\18.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void nineteen() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\19.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void twenty() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\20.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void thirty() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\30.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void fourty() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\40.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void fifty() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\50.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void sixty() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\60.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void seventy() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\70.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void eighty() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\80.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void ninety() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\90.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void hundred() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\100.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void thousand() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\thousand.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void million() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\million.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void oneBillion() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\oneBillion.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1500);    }
+	
+	public static void zero() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\zero.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void enteYourNumberAgain() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\enteYourNumberAgain.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+
+	public static void enteYourNumber() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\enteYourNumber1.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+
+	public static void invalid() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\invalid.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	public static void yourResultIs() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		File filePath = new File("C:\\Users\\balen\\Desktop\\sounds\\yourResultIs.wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(1000);    }
+	
+	
+	
+}
