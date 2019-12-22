@@ -1,0 +1,99 @@
+
+public class Method {
+	 
+	//pewist nabu  har nam wist bisrmo
+//	public static String convert_tenThousand_to_ninteenThousand(int numberInt) {
+//		System.out.println(numberInt);
+//		String result ="";
+//		if(numberInt>=10000 && numberInt<20000) {       // 3 digit i axirakai wata bchukakan la dabain u methodi 1-1000 call akain inja "hazar" bo axirakai zyad akain
+//			String stringNumber = String.valueOf(numberInt);
+//			stringNumber = stringNumber.substring(0, stringNumber.length()-3);  // xoi agar hata lengthaka xoi bet awa hata axir zhmara dabe bas agar (-3)be awa 3 digit la abat
+  //          numberInt = Integer.parseInt(stringNumber);
+   //         result=Method.convert_ten_to_ninteen(numberInt);
+      //      result=result+"hazar "; // bo axirakai zyad akain
+	//	}
+	//	return result;
+	//}
+	
+	public static String convert_ten_to_ninteen(int numberInt) {
+		String result ="";
+		
+	if(numberInt==10) {     result= "da "; 	     	}	
+	if(numberInt==11) {     result= "yanza "; 		}	
+	if(numberInt==12) {     result= "dwanza "; 		}
+	if(numberInt==13) {     result= "siyanza ";  	}	
+	if(numberInt==14) { 	result= "chwarda "; 	}	
+	if(numberInt==15) {     result= "panza "; 	    }	
+	if(numberInt==16) {     result= "shanza "; 		}	
+	if(numberInt==17) {    	result= "7ava "; 	    }
+	if(numberInt==18) {     result= "hazhda "; 		}
+	if(numberInt==19) {   	result= "nozda ";       }
+	return result;
+	}
+	
+	
+	public static String convert(int numberInt) {
+		String result ="";  
+		
+		class LocalInnerClass{ 
+			    String oneToThousand(int numberInt){
+			    	String result ="";  // resulti naw local inner class
+		if(numberInt==1) {        result= "yak "; 		}	
+		if(numberInt==2) {    	  result= "dw ";  		}
+		if(numberInt==3) {        result= "se "; 		}	
+		if(numberInt==4) {        result= "chwar "; 	}	
+		if(numberInt==5) {        result= "penj ";  	}	
+		if(numberInt==6) {        result= "shash "; 	}	
+		if(numberInt==7) {    	  result= "7awt "; 	    }
+		if(numberInt==8) {    	  result= "hasht "; 	}
+		if(numberInt==9) {    	  result= "no "; 	    }
+	
+		if(numberInt>=20 && numberInt<30) {    result= "bist ";      }
+		if(numberInt>=30 && numberInt<40) {    result= "si ";        }
+		if(numberInt>=40 && numberInt<50) {    result= "chl ";       }
+		if(numberInt>=50 && numberInt<60) {    result= "panja ";     }
+		if(numberInt>=60 && numberInt<70) {    result= "shast ";     }
+		if(numberInt>=70 && numberInt<80) {    result= "7afta ";     }
+		if(numberInt>=80 && numberInt<90) {    result= "hashta ";    }
+		if(numberInt>=90 && numberInt<100){   result= "nawa ";       }
+		
+		if(numberInt>=100 && numberInt<200) {    result= "sad ";       }
+		if(numberInt>=200 && numberInt<300) {    result= "dw sad ";    }
+		if(numberInt>=300 && numberInt<400) {    result= "se sad ";    }
+		if(numberInt>=400 && numberInt<500) {    result= "chwar sad "; }
+		if(numberInt>=500 && numberInt<600) {    result= "penj sad ";  }
+		if(numberInt>=600 && numberInt<700) {    result= "shash sad "; } 
+		if(numberInt>=700 && numberInt<800) {    result= "7awt sad ";  }
+		if(numberInt>=800 && numberInt<900) {    result= "hasht sad "; }
+		if(numberInt>=900 && numberInt<1000){    result= "no sad ";   }
+		return result;
+			    }}
+		result=new LocalInnerClass().oneToThousand(numberInt); // bo run krdni awai saro
+		
+		
+		if(numberInt>=1000 && numberInt<1000000) {       // 3 digit i axirakai wata bchukakan la dabain u methodi 1-1000 call akain inja "hazar" bo axirakai zyad akain
+			String stringNumber = String.valueOf(numberInt);
+			stringNumber = stringNumber.substring(0, stringNumber.length()-3);  // xoi agar hata lengthaka xoi bet awa hata axir zhmara dabe bas agar (-3)be awa 3 digit la abat
+            numberInt = Integer.parseInt(stringNumber);
+            if (numberInt>=10 && numberInt<20) {
+            	result=Method.convert_ten_to_ninteen(numberInt);
+            }else {
+            	result=new LocalInnerClass().oneToThousand(numberInt);
+            }
+            result=result+"hazar "; // bo axirakai zyad akain
+		}
+		
+		if(numberInt>=1000000 && numberInt<1000000000) {       // 6 digit i axirakai wata bchukakan la dabain u methodi 1-1000 call akain inja "million" bo axirakai zyad akain
+			String stringNumber = String.valueOf(numberInt);
+			stringNumber = stringNumber.substring(0, stringNumber.length()-6);  // xoi agar hata lengthaka xoi bet awa hata axir zhmara dabe bas agar (-6)be awa 6 digit la abat
+            numberInt = Integer.parseInt(stringNumber);
+            if (numberInt>=10 && numberInt<20) {            
+            	result=Method.convert_ten_to_ninteen(numberInt); 
+            }else {                                                     
+            	result=new LocalInnerClass().oneToThousand(numberInt);
+            }
+            result=result+"million "; // bo axirakai zyad akain
+		}
+		return(result);
+	}
+}
