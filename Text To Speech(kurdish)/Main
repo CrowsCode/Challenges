@@ -1,0 +1,79 @@
+package textToSpeech;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JOptionPane;
+
+public class Main {
+	
+	public static void play(String audioFileName_value) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		
+		File filePath = new File("C:\\Users\\balen\\Desktop\\TTS\\"+audioFileName_value+".wav");
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(filePath);
+		Clip clip = AudioSystem.getClip();    clip.open(audioInputStream);     clip.start();    	Thread.sleep(250);    }
+	
+	
+	public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		int numberOfKeys=77;
+		
+		Scanner in = new Scanner(new File("C:\\Users\\balen\\Desktop\\TTS\\TTS.txt")); //(1) keysArray hamu key yakani tya abet awash bo muqaranakrdn ba textArray[i] bakar det
+		String[] keysArray =new String[numberOfKeys];//(2)
+		for(int v=0;v<numberOfKeys;v++) {    //(3)
+	    keysArray[v]= in.next();   //(4)
+	    in.next();         System.out.print(keysArray[v]+"  "); }  //(5)  
+			   
+		in.close();   in=null;  //abe close kre scanner inja yaksan ba null inja dubara aikainawa sarata
+		in = new Scanner(new File("C:\\Users\\balen\\Desktop\\TTS\\TTS.txt"));
+		System.out.println();
+		Map<String, String> map= new HashMap<>(); //1 bo add krdni key u valueakan la file akawa bo map'aka
+		String key="";    String value=""; //2
+		for(int k=0;k<numberOfKeys;k++) { //3
+			key=in.next(); value=in.next();  //4 
+			map.put(key, value);   }  //5
+		in.close();  // daxstni scanner
+		
+		
+		String text=JOptionPane.showInputDialog("Enter a kurdish text");
+		String[] textArray = text.split("");
+		
+		for(int i=0;i<textArray.length;i++) {
+			if(textArray[i].equals(" ")) {
+				Thread.sleep(1000);
+			}
+			if(textArray[i].equals("ا") || textArray[i].equals("ە")) {
+			continue;
+			}
+			if((i+1 <textArray.length ) &&((textArray[i+1]).equals("ا") || (textArray[i+1]).equals("ە")) ) {
+				for(int ii=0;ii<numberOfKeys;ii++) {
+					if((i+1 <textArray.length ) &&((textArray[i]+textArray[i+1]).equals(keysArray[ii])) ) {
+						play(map.get(keysArray[ii]));
+						System.out.print(keysArray[ii]);
+	}}}	// daxstni if  inja for inja if		
+		   else {  
+				for(int ii=0;ii<numberOfKeys;ii++) {
+					if(textArray[i].equals(keysArray[ii])) {
+						play(map.get(keysArray[ii]));
+						System.out.print(keysArray[ii]);
+						break;
+				}} //daxstni if u for
+			} //daxstni else
+		}
+		
+		
+		
+		
+		
+		
+	}
+
+}
