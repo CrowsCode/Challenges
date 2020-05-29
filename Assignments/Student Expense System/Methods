@@ -105,12 +105,13 @@ public class Methods {
 		System.out.println("Enter your Password: ");
 		password = in.nextLine();
 
-		System.out.println("\n\n\n");
 		password=passwordHashin_MD5(password);//MD5
 		for (int i = 0; i < Main.maxNumberOfUsers && Main.users.get(i).getUsername() != null; i++) {
 			if (Main.users.get(i).getUsername().equals(username)) {
 				if (Main.users.get(i).getPassword().equals(password)) {
 					Main.currentLoggedinUserID = i;
+					System.out.println("***************************************************");
+					System.out.println("***************************************************\n\n");
 					loginInterface();
 					return;//so when a user logout s(6), so will this method
 				}
@@ -118,7 +119,7 @@ public class Methods {
 		}
 		System.out.println("Wrong password or username. wait 4 seconds before trying again");
 		System.out.println("***************************************************");
-		System.out.println("***************************************************");
+		System.out.println("***************************************************\n\n");
 		try {	Thread.sleep(3500);	} catch (InterruptedException e) {		e.printStackTrace();	}
 	}
 
