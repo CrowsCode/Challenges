@@ -11,10 +11,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
-	public static  File fileUsers = new File("C:\\Users\\balen\\OneDrive\\Desktop\\Users.txt");//har rizi User'eka //username,password,ID,Totalbill// data'kan ba "," jya krawnato
-	public static  File fileItems = new File("C:\\Users\\balen\\OneDrive\\Desktop\\Items.txt");//har rizi Item'i User'eka //ItemName,ItemPrice,ItemQuantity,Date// data'i Item ka ba "," jya krawnato
+	static File path = new File("C:\\Users\\balen\\OneDrive\\Desktop\\Assignment\\Student Espense System");////Tanha am path'a pewisti ba gorina////
+	
+	public static  File fileUsers = new File(path+"\\Users.txt");//har rizi User'eka //username,password,ID,Totalbill// data'kan ba "," jya krawnato
+	public static  File fileItems = new File(path+"\\Items.txt");//har rizi Item'i User'eka //ItemName,ItemPrice,ItemQuantity,Date// data'i Item ka ba "," jya krawnato
 	//bas kate ka 2 item i habe awa ba "|" jya akreno  //tamata,2,1,Date|pskit,2,1,Date//
-	public static  File fileCheckoutHistory = new File("C:\\Users\\balen\\OneDrive\\Desktop\\CheckOutHistory.txt");//
+	public static  File fileCheckoutHistory = new File(path+"\\CheckOutHistory.txt");
 	
 	public static int maxNumberOfUsers=4;////Changing it will the maximum members allowed to sign up, And other things accordingly to keep it dynamic////
 	public static int currentLoggedinUserID;
@@ -25,6 +27,9 @@ public class Main {
 	static Scanner in = new Scanner(System.in);
 	
 	public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
+		
+		//Folder'ek drust akat law path'a agar nabu u agar habu awa hich naka
+		if(path.mkdirs())  System.out.println("Couldn't find Student Espense System Folder, as a result one has been created.");
 		
 		//1//The File's createNewFile() method creates a new, empty file named by the pathname if a file with this name does not yet exist.
 		if (fileUsers.createNewFile()) 	System.out.println("Couldn't find Users file, as a result one has been created.");
