@@ -1,0 +1,770 @@
+package X_O_Game;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+import java.util.Scanner;
+class Player{
+	int points;
+	String name;
+	int wins; //number of times the player won
+	int loses; //number of times the player lost
+	String variable; // symbol akai ka xanakani pe agrn
+	public  Player(String variable) {  this.variable =variable;   }
+	public void setPoint(int points) {  this.points =points;   }
+	public String getName(){return name;}  public int getPoints(){return points;}
+}  
+class Computer { // bas bo awaya ka katek difficulty hallabzherdre (nawakai) bdret u inja dwai la regai nawakawa methodi jyawaz bakar yat(awash la 'main' comapre akren)
+	 String name="None";
+	 public static String levelOne="Alpha";
+	 public static String levelTwo="Beta";
+	 public static String levelThree="Omega";
+	 void setDifficulty(int gameDifficulty) {
+		if(gameDifficulty==1)      {     	firstDifficulty();        }
+		else if(gameDifficulty==2) {        secondDifficulty();       }
+		else if(gameDifficulty==3) {        thirdDifficulty();        }   }
+	public void firstDifficulty(){name=levelOne;}  public void secondDifficulty(){name=levelTwo;} public void thirdDifficulty(){name=levelThree;}
+}
+public class Game { // 'main' class
+	static String vF="O";      //variableFirst
+	static String vS="X";      //variableSecond
+	
+	static Scanner in = new Scanner(System.in);  
+	static Random r; //classi random
+	static Player p1; //class'i Player
+	static Player p2; //class'i Player
+	static String[][] array2d;  //haman 2d array la hamu yariyakaya bakar yato//static'a ka yak jar ta3rif kret u data'kai la hamu shwenek haman sht be
+	static int number=0;   // bo dyarikrdni "size"i board akaya ka {number*number}be  bakar yato la zorbai methodakana 
+	static int choice=0;   // bo "player" ka aw zhmarai halliabzheret u ainuse adre bam variable'a
+	static int choiceTemp;  //bo mawayaki kati "value"i choice acheta am variable'awa //labar awai la kati dozinawai index'i zhmaraka (-/+) ru ayat u value agordre
+	static boolean IsAlreadyChosen;  // agar "true" be awa aw zhmarai hallbzherdrawa peshtr halbzherdrawa boya dubara dawai input akato 
+	static boolean isBoardFull;  // agar "true" be awa board'aka fulla{{hamui pr krawato}} // agar "false" ishta {{hamui pr nakrawato}}
+	static boolean exitBoard; //agar "true" be awa la "loop'i boardaka" yata darawa u inja calculate'i resut akre
+	static String playAgain;
+	
+	static int pointsP1; 
+	static int pointsP2;  
+	//kati calculate'krdni pointkan lamana hall aigrdren// point'i playe1 hallagret la PLayerVsPLayer // la PlayerVsComputer {{point'i Player=pointsP1}} hallagret
+	static String firstToStart;  
+	static String secondToStart;
+	//la kati dice hall'yan dyari akren // la "showResult'akan bakar yano ka adren ba class'i "player"
+	static String winnerName;  
+	static String loserName;
+	//nawi winner u loser {hallagrn} la "showResult"akana 
+	
+	//computer related fields(START)
+	static String[] tauntsAfterGainingAnotherPoint =  {"HA HA HA, One more point for me!" , "I am one more point closer to winning!" , "HE HE HE, looks like you are going to lose!" };  
+	static String[] tauntsAfterNotGettingAnotherPoint= {"You Think you can beat me?","Strange! I Couldn't score another point this time!"};
+	static String[] tauntsAfterPreventingOponentFromGainingAnotherPoint= {"Did you really think I would let you gain another point?","Just Give Up already!","Almost didn't see that!"};
+	static String[] tauntsWhenGoingForRandom= {"hmm...","Let me flip my coin, if 'heads' I WIN else you LOSE, HA HA EITHER WAY YOU LOSE"};
+	//taunts akan la 7alati jyawaza ba randomi yakekyan hallabzherdren
+	static int gameDifficulty=0;  //katek ka 'user' difficulty hall abzheret awa acheta am variable a u dwai anerdret bo methodi'computer' i classi'computer'
+	static int gameType;   //'user' dyari aka ka playerVplayer yan playerVcomputer be, u dwaish la 'main' ba peyi zhmaraka (2 sectioni jyawaza) yakekyan active aka
+	static Computer computer = new Computer();  //bo awai 'object'aka reuse bkre
+	
+	static int pointsComputer=0;  //pointakani 'computer' abzhmeret wata(pointsComputer++)
+	static int X_Coordinate=0;    //row(asoi)
+	static int Y_Coordinate=0;    //column(stuni)
+	static boolean isOccupied ;  // agar "true" bet wata aw (x,y)a {{battal nya}} yan {{hallbzherdrawa u agirdre}} // agar "false" be awa {{batalla}}
+	static boolean hasComputerChosenOrNot;   //agar "true" be awa (x,y)akai {{hall bzhardua}} // agar "false" be awa {{halli nabzhardua}}
+	//computer related fields(END)
+	
+
+	public static void main(String[] args) throws InterruptedException {
+		
+		chooseGameType();
+		
+		if( gameType==1) { 	// PlayerVsPlayer{{START}}
+			askForName();
+			do{
+			rollTheDice();
+			System.out.println("Enter board's size: ");
+			getSize();
+			array2d = new String[number][number];
+			createBoard();
+			printBoard();
+			loop:
+			while(!isBoardFull) { //BOARD{{STARTS}}
+				
+				System.out.println("\n"+firstToStart+" enter a number, Or enter \"0\" to exit ");   //first
+				do{	
+					choice=getInput();   if(exitBoard) { break loop;  }
+					choiceTemp =choice;   IsAlreadyChosen=false; 	checkChosen(choice);	
+				}while(IsAlreadyChosen); 
+				if(firstToStart.equals(p1.name)){choose(p1.variable);}     
+				else {choose(p2.variable);}
+				printBoard();	isBoardFull();  if(isBoardFull) { 	System.out.println("Board is full:");   break loop;	} //middle
+				
+				System.out.println("\n"+secondToStart+" enter a number, Or enter \"0\" to exit "); //second
+				do{
+					choice=getInput();   if(exitBoard) { break loop;  }
+					choiceTemp =choice;   IsAlreadyChosen=false;	checkChosen(choice);	
+				}while(IsAlreadyChosen); 	  
+				if(secondToStart.equals(p1.name)){choose(p1.variable);}     
+				else {choose(p2.variable);}
+				printBoard();  isBoardFull();  
+			}  //BOARD{{ENDS}}
+			System.out.println("Calculating results: ");
+			calculateResults();  showResult();
+			askIfWantedToPlayAnotherGame_And_PreviousGameResults();
+			}while(playAgain.equals("AGAIN"));// END of PlayerVsPlayer{{DO WHILE}} 
+		}  // PlayerVsPlayer{{END}}
+		
+		else if(gameType==2) {  //PlayerVsComputer{{START}}
+			chooseComputerGameDifficulty();
+			intrduceComputerDependingOnDifficulty();
+			askForName();
+			do{
+			rollTheDice();
+			System.out.println("Enter board's size: ");
+			getSize();
+			array2d = new String[number][number];
+			createBoard();
+			printBoard();
+			loop:
+			while(!isBoardFull) { //BOARD{{STARTS}}
+				if(!  (firstToStart.equals(computer.name))  ) {   //IF PLAYER FIRST
+					System.out.println("\n"+firstToStart+" enter a number, Or enter \"0\" to exit ");  
+					do{	
+						choice=getInput();   if(exitBoard) { break loop;  }
+						choiceTemp =choice;	IsAlreadyChosen=false; 	checkChosen(choice);	
+					}while(IsAlreadyChosen);  choose(p1.variable); 
+					
+				    	printBoard(); 	isBoardFull(); 	if(isBoardFull) {	System.out.println("Board is full:");   break loop;   } 
+						System.out.println("\n" + secondToStart + " is choosing a number!"); 
+						
+						getInputFromComputer();
+						 computerStatesWhatItHasChosen();   	
+						printBoard(); 	isBoardFull(); 	
+	    	   }else{   //IF PLAYER SECOND
+					    System.out.println("\n" + firstToStart + " is choosing a number!"); 																
+					    getInputFromComputer();
+					    computerStatesWhatItHasChosen();   	
+				    	printBoard();   isBoardFull();  if(isBoardFull) {	System.out.println("Board is full:");   break loop;   }
+				    	
+				    	System.out.println("\n"+secondToStart+" enter a number, Or enter \"0\" to exit ");   
+					do{	
+						choice=getInput(); 	if(exitBoard) { break loop;  }
+						choiceTemp =choice;   	IsAlreadyChosen=false;	checkChosen(choice);	
+					}while(IsAlreadyChosen);  choose(p1.variable); 
+					
+						printBoard(); 	isBoardFull(); 
+				}    } //BOARD{{ENDS}}
+			System.out.println("Calculating results ");
+			calculateResults();     showResult();
+			askIfWantedToPlayAnotherGame_And_PreviousGameResults();
+			}while(playAgain.equals("AGAIN"));// END of PlayerVsComputer{{DO WHILE}} 
+		}  //PlayerVsComputer{{END}}
+		
+		
+	}// END OF {{MAIN METHOD}} 
+
+
+	
+	//   ComputervsPlayer Methods {STARTS}   //
+	public static void chooseComputerGameDifficulty() throws InterruptedException {
+		/*tanha bo awaya ka user zhmarayak bat ba "gameDifficulty"
+		 * wa abet bas zhmara bet law range(1-3) ka dyari krawa
+		 */
+		System.out.println("Choose Game Difficulty, ");
+		while(true) {
+			System.out.println("Enter'1' for low difficulty");
+			System.out.println("Enter'2' for high difficulty");
+			System.out.println("Enter'3' for insane difficulty");
+			System.out.println("Enter'4' for Potato difficulty");
+			try {   
+				gameDifficulty=Integer.parseInt(in.next().trim()); } catch (NumberFormatException e) {
+				System.out.println("Enter again, make sure it's a number this time "); continue;
+			}
+			if(!( gameDifficulty<=3 && gameDifficulty>=1) ) {
+					System.out.println("Out of range, enter a number again, but make sure it's within range(1-3)");   
+			}
+			else if(  gameDifficulty==4 ) { System.out.println("NOT AVAILABLE, COMING SOON, CHOOSE ANOTHER DIFFICULTY");  //delete this
+			Thread.sleep(1000);  System.out.println("Stay Tuned for more updates!"); Thread.sleep(750); }
+			
+			else {break;}
+			  } 
+	}
+
+	public static void intrduceComputerDependingOnDifficulty() {
+		/*peshtr variablekman drust krdbu ka btwanet addresi objecti class'i computer hallgre ballam objectakaman drust nakrdbu boi
+		 * boya lera objectakai drust akain u "gameDifficulty=int"ayayin ba constructorakai bo awai bo awai awish nawi computer'akaman pe bllet ba peyi difficulty
+		 * wa bshlle ka yari lagal keya akai
+		 */
+		 computer.setDifficulty(gameDifficulty);
+		System.out.println("You will be playing against "+computer.name);
+	}
+
+	
+	public static void getInputFromComputer(){
+		/*sarata "hasComputerChosenOrNot=false" bo awai nawaku kayakai peshu la yakek law chan methodaya krabet ba true boya aikainawa ba valuei default'i
+		 *ba peyi level akan
+		 *level 1)bas hawli regri grtn la barambarakai agre la point zyad krdn agar awa nakre awa ba fullyRandom halliabzheret
+		 *level 2)sarata hawli point zyakrdn bo xoi aya agar naitwani inja regri la barambar agret la point zyad krdn u agar awash nakre ba fullyRandom halliabzheret
+		 *level 3)har waku level 2 waya bas awaya ka la jyati fullyRandom amayan bakar ahenet"smartRandomLevelThree" ka wai le aka random akanishi bashtr be
+		 *wa taunt akanish ba peyi 7alatakana
+		 */
+		hasComputerChosenOrNot=false;
+		if(computer.name.equals(Computer.levelTwo) || computer.name.equals(Computer.levelThree)) {
+			//Here it will try to gain more points
+			if(!hasComputerChosenOrNot) {  horizontalComputerChoice(p2.variable);  }  // p2.variable=VariableSecond=computer
+			if(!hasComputerChosenOrNot) {  verticalComputerChoice(p2.variable);  }
+			if(!hasComputerChosenOrNot) {  diagonalRightComputerChoice(p2.variable);  }
+			if(!hasComputerChosenOrNot) {  diagonalLeftComputerChoice(p2.variable);  }
+			if (hasComputerChosenOrNot) {   System.out.println(tauntsAfterGainingAnotherPoint[r.nextInt(tauntsAfterGainingAnotherPoint.length)]);    return; }
+		}//Here It will prevent it's opponent from gaining more points	
+		if (hasComputerChosenOrNot) {   System.out.println(tauntsAfterNotGettingAnotherPoint[r.nextInt(tauntsAfterNotGettingAnotherPoint.length)]);    return; }
+		if(!hasComputerChosenOrNot) {  horizontalComputerChoice(p1.variable);  }
+		if(!hasComputerChosenOrNot) {  verticalComputerChoice(p1.variable);  }
+		if(!hasComputerChosenOrNot) {  diagonalRightComputerChoice(p1.variable);  }
+		if(!hasComputerChosenOrNot) {  diagonalLeftComputerChoice(p1.variable);  }
+		if (hasComputerChosenOrNot) {  System.out.println(tauntsAfterPreventingOponentFromGainingAnotherPoint[r.nextInt(tauntsAfterPreventingOponentFromGainingAnotherPoint.length)]);  return; }
+		//It Will go for random
+		if(!hasComputerChosenOrNot) {
+			System.out.println(tauntsWhenGoingForRandom[r.nextInt(tauntsWhenGoingForRandom.length)]); 
+			if(computer.name.equals(Computer.levelOne) || computer.name.equals(Computer.levelTwo)) { FullyRandom();  }else { smartRandomLevelThree(); }
+		}
+		
+	 } 
+	
+	public static void horizontalComputerChoice(String variable) {
+		/*lera shar7i wrdi har 4 method'i "ComputerChoice" anusm
+		 * la 3 danakai ka bas chonyati roshtni scan/loop/search aka akam
+		 * bo "horizontal" har 2 for loopi sadaya ka har ba shewai asai la chapo bo rast arwat u inja acheta rizek xwartr u dubara la chapo bo rast
+		 * wata agar(x,y) awa la (1,0) dast pe aka u arwa bo (number-1,0) inja acheta rizi xwarutr u dubara la(1,1) arwato bo (number-1,1)
+		 * (2) marj haya ka ba shwenya agaret la har garaneka  //  ba wa daneyin xall=(x,y)
+		 * 1)ba shwen xalleka agare ka lai 'rast' u lai 'chapi' yaksan bn ba "variable" kate awai dozyawa inja ser aka bzana aw xalla {p2.variable yan p1.variable} leya, agar leyi nabu inja xallaka hallabzheret
+		 * 2)ba shwen 2 xalla agaret ka yaksan bn ba "variable" hardukyan, katek ka dozyo awa ser akat bzane(a)lai rasti 2 xallaka batalla? (b) lai chapi 2 xallaka batalla? 
+		 * wa dwai dozinawai xallaka "hasComputerChosenOrNot=true" bo awai methodei ka la "getInputComputer" run nakre u shweneki ka hallbzherdret
+		 * dwai awa"ForwardCheck" u "BackwardCheck" akret xallaka, awash bo awaya ka 7sab kret aya baw xalla 'point' eki ka ba dast ahendret yan na? 
+		 * agar ba dast nahendre awa law 2 methodi check awa "hasComputerChosenOrNot=flase" akre u dubara ba shwen xalleki tra agareyino
+		 * aw regayayi bakarm henawa ka "indexOutOfBound: drust nabe awaya ka pesha wai la arrayaka {zhmaraka+zhmara} da nem chum ba if serm krdua aya agar goran kari la zhmarakaya bkam
+		 * acheta xwaru sfr yan abet ba zhmara=number(awai size akai pe dyari akre) 
+		 * awai ka {{{x=1}}} wa nak {{{0}}} ka kate ba shwen xallakan agare marji (1) be yan (2) awa la xanakai nawarasto "fa7si" daurubari akat  //haman sht bo 3 methodakai kash
+		 */
+		int x = 1;
+		looop:
+		for (int y = 0; y < number; y++) {
+			x = 1;
+				for (int kk = x; !(kk >= number); kk++) {
+					if(!((kk - 1 - 1) < 0)) { 
+						if(  array2d[y][kk - 1 - 1].equals(variable) && array2d[y][kk].equals(variable)  ) {        //1)
+							if ( ! (  array2d[y][kk - 1 ].equals(p1.variable) || array2d[y][kk - 1 ].equals(p2.variable) ) ) { 
+								X_Coordinate = kk - 1;	Y_Coordinate = y;  hasComputerChosenOrNot=true;  break looop;
+							}	}   }
+					if ( array2d[y][kk - 1].equals(variable) && array2d[y][kk].equals(variable)  ) {                 //2)
+						if (!((kk - 1 - 1) < 0)) { 
+							if ( ! (  array2d[y][kk - 1 - 1].equals(p1.variable) || array2d[y][kk - 1 - 1].equals(p2.variable) ) ) {
+								X_Coordinate = kk - 1 - 1;	Y_Coordinate = y; hasComputerChosenOrNot=true;	  horizontalForwardCheck(variable);  break looop;   }
+						}if (!(kk + 1 >= number)) {   
+							if (!  (array2d[y][kk + 1].equals(p1.variable) || array2d[y][kk + 1].equals(p2.variable))  ) {
+								X_Coordinate = kk + 1;	Y_Coordinate = y;  hasComputerChosenOrNot=true;   horizontalBackwardCheck(variable);   break looop;
+								}  }  }
+					else {  continue;  }  }    
+		}   } 
+	public static void verticalComputerChoice(String variable) {
+		/*lera kamek jyawaza la loopi asai ka bam shewayaya, (x,y) 
+		 *shewazaka bam shewaya ka la saro bo xwaro inja chapo bo rast,,, bo nmuna la xalli(0,1) awa dast pe aka awa ba shewai "stuni" yata xwaro ta agata(0,number-1)
+		 * in "x"barau rast arwat u abe ba (1,1) u dubara ba "stuni" barau xwaro awato (1,number-1)
+		 * bam shewaya bardawam abe ta {x=number-1}
+		 */
+		int yy=1;
+		looop:
+		for(int x =0 ; x< number ; x++) {
+			yy=1; 
+				for (int k = yy; !(k >= number); k++) { 
+					if(!((k - 1 - 1) < 0)) { 
+						if(  array2d[k - 1 - 1][x].equals(variable) && array2d[k][x].equals(variable)  ) {  
+							if ( ! (  array2d[k - 1][x].equals(p1.variable) || array2d[k - 1][x].equals(p2.variable) ) ) { 
+								X_Coordinate = x;	Y_Coordinate = k - 1; hasComputerChosenOrNot=true;	 break looop;
+							}	}   }
+					if( array2d[k-1][x].equals(variable) &&  array2d[k][x].equals(variable)  ) {
+						if (!((k - 1 - 1) < 0)) { 
+							if ( ! (  array2d[k - 1 - 1][x].equals(p1.variable) || array2d[k - 1 - 1][x].equals(p2.variable) ) ) {
+								X_Coordinate = x;	Y_Coordinate = k - 1 - 1;  hasComputerChosenOrNot=true; verticalForwardCheck(variable);  break looop;   }
+						}if (!(k + 1 >= number)) { 
+							if (!  (array2d[k + 1][x].equals(p1.variable) || array2d[k + 1][x].equals(p2.variable))  ) {
+								X_Coordinate = x;	Y_Coordinate = k + 1;  hasComputerChosenOrNot=true; verticalBackwardCheck(variable); break looop;
+								}  }  }
+					else {	continue;	}	}	
+		}   } 
+	public static void diagonalRightComputerChoice(String variable) {
+		/*lera bahoi shewazei search/scan jyawazakawa 2 looop la yak pchraw bakar ahnein (x,y)
+		 * "right" "diagonal" mabast lawaya ka ba "lari" la lai chapo bo rast aroin, ka la {south west} dast pe aka bo { north east(rozh hallat)}
+		 * bo nmuna la xalli(1,number-1) awa dast pe aka,agar twani awa {x+1 u y+1} akat  agar nai twani awa {y-1 wata rizek acheta sarawa} 
+		 * inja dubara ba lari{x+1 u y+1} arwato ta natwanet u dubara arwato {saro=y-1} // la kotai ((looop1))  awa la (1,0) bo (number-1,number-1)  krdua
+		 * wa bo ((looop2)) la (2,1) dast pe aka bo awai ba axir shweni((loop1)) narwato
+		 * 
+		 */
+			X_Coordinate = -1;  Y_Coordinate =-1;
+			int xx=1;
+			looop1:
+			for(int y = number-1 ; y>=0 ; y--) {
+				xx=1;
+				 if(!   (  (y-1)<0 )   ) {
+							for (int k = y,  kk=xx; !((k >= number) ||  (kk)>=number  )   ; kk++, k++) {
+								if(!( (k - 1 - 1) < 0  ||  (kk - 1 - 1) < 0   )) { 
+									if(  array2d[k - 1 - 1][kk - 1 - 1].equals(variable) && array2d[k][kk].equals(variable)  ) {  
+										if ( ! (  array2d[k - 1][kk - 1 ].equals(p1.variable) || array2d[k - 1][kk - 1 ].equals(p2.variable) ) ) { 
+											X_Coordinate = kk - 1;	Y_Coordinate = k - 1; hasComputerChosenOrNot=true;	  break looop1; 
+										}	}   }
+								if(( array2d[k-1][kk-1].equals(variable)  && array2d[k][kk].equals(variable) )         ) {
+									if (!( (k - 1 - 1) < 0  ||  (kk - 1 - 1) < 0   )) { 
+										if ( ! (  array2d[k - 1 - 1][kk - 1 - 1].equals(p1.variable) || array2d[k - 1 - 1][kk - 1 - 1].equals(p2.variable) ) ) {
+											X_Coordinate = kk - 1 - 1;	Y_Coordinate = k - 1 - 1; hasComputerChosenOrNot=true;	diagonalRightForwardCheck(variable); break looop1;   }
+									}if (!(k + 1 >= number ||  kk + 1 >= number  )  ) {  
+										if (!  (array2d[k + 1][kk + 1].equals(p1.variable) || array2d[k + 1][kk + 1].equals(p2.variable))  ) { 
+											X_Coordinate = kk + 1;	Y_Coordinate = k + 1;  hasComputerChosenOrNot=true; diagonalRightBackwardCheck(variable); break looop1;
+									}  }  }
+								else {   continue;   } 	}	} 
+				 }   
+			if( !  (  X_Coordinate == -1 && Y_Coordinate ==-1)  ) { return;  }
+			int yy=1;
+			looop2:
+				for(int x =2 ; x< number ; x++) {
+					yy=1;
+				 if(!   (  (x-1)<0   )    ) {
+							for (int k = yy,  kk=x; !((k >= number) ||  (kk)>=number  )   ; kk++, k++) {
+								if(!( (k - 1 - 1) < 0  ||  (kk - 1 - 1) < 0   )) { 
+									if(  array2d[k - 1 - 1][kk - 1 - 1].equals(variable) && array2d[k][kk].equals(variable)  ) {  
+										if ( ! (  array2d[k - 1][kk - 1 ].equals(p1.variable) || array2d[k - 1][kk - 1 ].equals(p2.variable) ) ) { 
+											X_Coordinate = kk - 1;	Y_Coordinate = k - 1; hasComputerChosenOrNot=true;	 break looop2;
+										}	}   }
+								if(( array2d[k-1][kk-1].equals(variable)  && array2d[k][kk].equals(variable) )         ) {
+									if (!( (k - 1 - 1) < 0  ||  (kk - 1 - 1) < 0   )) { 
+										if ( ! (  array2d[k - 1 - 1][kk - 1 - 1].equals(p1.variable) || array2d[k - 1 - 1][kk - 1 - 1].equals(p2.variable) ) ) {
+											X_Coordinate = kk - 1 - 1;	Y_Coordinate = k - 1 - 1; hasComputerChosenOrNot=true;	diagonalRightForwardCheck(variable); break looop2;   }
+									}if (!(k + 1 >= number ||  kk + 1 >= number  )  ) {  
+										if (!  (array2d[k + 1][kk + 1].equals(p1.variable) || array2d[k + 1][kk + 1].equals(p2.variable))  ) {
+											X_Coordinate = kk + 1;	Y_Coordinate = k + 1;  hasComputerChosenOrNot=true;  diagonalRightBackwardCheck(variable); break looop2;
+									}  }  }
+								else {   continue; }  }	}  
+				 }   } 	
+	public static void diagonalLeftComputerChoice(String variable) {
+		/*lera bahoi shewazei search/scan jyawazakawa 2 looop la yak pchraw bakar ahnein (x,y)
+		 * "left" "diagonal" mabast lawaya ka ba "lari" la lai rasto bo chap aroin, ka la {north east} dast pe aka bo {south west(rozh awa)} 
+		 * wata ba pechawanai "diagonalRight" boya nmuna na nusm bas awai ka baw pechawana roshtna abet {{x-1}} bkre u {{y+1}}
+		 */
+		X_Coordinate = -1;  Y_Coordinate =-1;
+		int xx=number-1-1;
+		looop1:
+		for(int y = number-1 ; y>=0 ; y--) {
+			xx=number-1-1;
+			 if(!   (   (y-1)<0 )   ) {
+						for (int k = y,  kk=xx; !((k >= number) ||  (kk)<0   )   ; kk--, k++) {
+							if(!( (k - 1 - 1) < 0  ||  (kk + 1 + 1) >= number   )) { 
+								if(  array2d[k - 1 - 1][kk + 1 + 1].equals(variable) && array2d[k][kk].equals(variable)  ) {  
+									if ( ! (  array2d[k - 1][kk + 1 ].equals(p1.variable) || array2d[k - 1][kk + 1 ].equals(p2.variable) ) ) { 
+										X_Coordinate = kk + 1;	Y_Coordinate = k - 1; 	hasComputerChosenOrNot=true;	 break looop1;   
+									}	}   }
+							if(( array2d[k-1][kk+1].equals(variable)  && array2d[k][kk].equals(variable) )  ) {
+								if (!( (k - 1 - 1) < 0  ||  (kk + 1 + 1) >= number   )) { 
+									if ( ! (  array2d[k - 1 - 1][kk + 1 + 1].equals(p1.variable) || array2d[k - 1 - 1][kk + 1 + 1].equals(p2.variable) ) ) {
+										X_Coordinate = kk + 1 + 1;	Y_Coordinate = k - 1 - 1; hasComputerChosenOrNot=true;	diagonalLeftForwardCheck(variable);  break looop1;   }
+								}if (!(k + 1 >= number ||  kk - 1 < 0  )  ) {  
+									if (!  (array2d[k + 1][kk - 1].equals(p1.variable) || array2d[k + 1][kk - 1].equals(p2.variable))  ) {
+										X_Coordinate = kk - 1;	Y_Coordinate = k + 1;  hasComputerChosenOrNot=true; diagonalLeftBackwardCheck(variable);  break looop1;
+						}  }  }	
+							else {   continue; }  }  } 
+			 } 
+		if( !  (  X_Coordinate == -1 && Y_Coordinate ==-1)  ) { return;  }
+		int yy=1;
+		looop2:
+			for(int x =number-1-1-1  ; x>=0 ; x--) {
+				yy=1;
+			 if(!   (   (x+1)>=number)    ) {
+						for (int k = yy,  kk=x; !((k >= number) ||  (kk)<0  )   ; kk--, k++) {
+							if(!( (k - 1 - 1) < 0  ||  (kk + 1 + 1) >= number   )) { 
+								if(  array2d[k - 1 - 1][kk + 1 + 1].equals(variable) && array2d[k][kk].equals(variable)  ) {  
+									if ( ! (  array2d[k - 1][kk + 1 ].equals(p1.variable) || array2d[k - 1][kk + 1 ].equals(variable) ) ) { 
+										X_Coordinate = kk + 1;	Y_Coordinate = k - 1; hasComputerChosenOrNot=true;	 break looop2;
+									}	}   }
+							if(( array2d[k-1][kk+1].equals(variable)  && array2d[k][kk].equals(variable) )  ) {
+								if (!( (k - 1 - 1) < 0  ||  (kk + 1 + 1) >= number   )) { 
+									if ( ! (  array2d[k - 1 - 1][kk + 1 + 1].equals(p1.variable) || array2d[k - 1 - 1][kk + 1 + 1].equals(p2.variable) ) ) {
+										X_Coordinate = kk + 1 + 1;	Y_Coordinate = k - 1 - 1; hasComputerChosenOrNot=true;	diagonalLeftForwardCheck(variable);  break looop2;   }
+								}if (!(k + 1 >= number ||  kk - 1 < 0  )  ) {  
+									if (!  (array2d[k + 1][kk - 1].equals(p1.variable) || array2d[k + 1][kk - 1].equals(p2.variable))  ) {
+										X_Coordinate = kk - 1;	Y_Coordinate = k + 1;  hasComputerChosenOrNot=true; diagonalLeftBackwardCheck(variable); break looop2;
+						}  }  }
+							  else {   continue; }   } 	}  
+			 }   } 
+
+	public static void horizontalBackwardCheck(String variable) {
+/*   am komalla methodai ka haman nawyan haya {{ka parameter'i(String variable)yan haya}}, hamui haman amanjyan haya:
+	 katek ka 'computer' (x,y)ek hallabzheret awa [[hasComputerChosenOrNot]] akat ba[[true]] bawatai awai ka (x,y)akai hallbzhardua
+	 bas nazanre ka aya baw (x,y)ya 'pointeki' tr zya aka boi yan na
+	 boya am methoda law (x,y)ai drawa achet "forward" yan "backward" yak ba yak'i aw "row/horizontal" yan "column/vertical" yan "diagonal" check aka
+	 ka aya ba hallbzhardni am(x,y)a pointek zyad abe yan na
+	 agar zyad nabu awa [[hasComputerChosenOrNot]] akat ba[[false]] bo awai 'computer' xalleki bashtr bdozeto
+	 wa boya [X_Coordinate] akan "+1" yan "-1" akren ka aw (x,y) ai hallbzherdrawa ishta hichi tya nya boya baw (- yan +) ya achina sar(x,y)akai ka "symbol"akai tyaya ka mabastmana
+*/
+		int vR=0;  
+		// variableRepeated
+		for(int x=X_Coordinate -1; x>= 0; x-- ) {  
+			if(array2d[Y_Coordinate][x].equals(variable) ) {
+				vR++;	}else {	break;		}	}
+		if( !  ((vR+1)%3==0) ) {  //agar ba zyad krdni (x,y)yaki ka [[!=nabu]] ba chan jarai "3" awa [[hasComputerChosenOrNot]] akat ba[[false]]
+			hasComputerChosenOrNot=false;  
+		}	}
+	public static void horizontalForwardCheck(String variable) {
+		int vR=0; 
+		// variableRepeated
+		for(int x=X_Coordinate+1; x <number  ; x++ ) {  
+			if(array2d[Y_Coordinate][x].equals(variable) ) {
+				vR++;	}else {	break;		}	}
+		if( !  ((vR+1)%3==0) ) {
+			hasComputerChosenOrNot=false; 
+		}	} 
+	public static void verticalBackwardCheck(String variable) {
+		int vR=0;  
+		// variableRepeated
+		for(int y=Y_Coordinate -1; y>= 0; y-- ) {
+			if(array2d[y][X_Coordinate].equals(variable) ) {
+				vR++;		}else {		break;		}	}
+		if( !  ((vR+1)%3==0) ) {
+			hasComputerChosenOrNot=false; 
+		}   }
+	public static void verticalForwardCheck(String variable) {
+		int vR=0; 
+		// variableRepeated
+		for(int y=Y_Coordinate+1; y<number ; y++ ) {
+			if(array2d[y][X_Coordinate].equals(variable) ) {
+				vR++;		}else {		break;		}	}
+		if( !  ((vR+1)%3==0) ) {
+			hasComputerChosenOrNot=false;
+		}   }
+	public static void diagonalRightBackwardCheck(String variable) {
+		int vR=0;  
+		// variableRepeated
+		for(int y=Y_Coordinate -1, x=X_Coordinate-1  ;   y>= 0&& x>= 0  ;   y--, x-- ) { 
+			if(array2d[y][x].equals(variable) ) {
+				vR++;		}else {		break;		}	}
+		if( !  ((vR+1)%3==0) ) {
+			hasComputerChosenOrNot=false;
+		}   }
+	public static void diagonalRightForwardCheck(String variable) {
+		int vR=0;  
+		// variableRepeated
+		for(int y=Y_Coordinate+1, x=X_Coordinate+1  ;   y<number && x<number  ;   y++, x++ ) { 
+			if(array2d[y][x].equals(variable) ) {
+				vR++;		}else {		break;		}	}
+		if( !  ((vR+1)%3==0) ) {
+			hasComputerChosenOrNot=false;
+		}   }
+	public static void diagonalLeftBackwardCheck(String variable) {
+		int vR=0;  
+		// variableRepeated
+		for(int y=Y_Coordinate -1, x=X_Coordinate+1  ;   y>= 0&& x<number  ;   y--, x++ ) {
+			if(array2d[y][x].equals(variable) ) {
+				vR++;		}else {		break;		}	}
+		if( !  ((vR+1)%3==0) ) {
+			hasComputerChosenOrNot=false; 
+		}   }
+	public static void diagonalLeftForwardCheck(String variable) {
+		int vR=0;  
+		// variableRepeated
+		for(int y=Y_Coordinate +1, x=X_Coordinate-1  ;   y<number && x>=0  ;   y++, x-- ) { 
+			if(array2d[y][x].equals(variable) ) {
+				vR++;		}else {		break;		}	}
+		if( !  ((vR+1)%3==0) ) {
+			hasComputerChosenOrNot=false;
+		}   }
+	
+	public static void FullyRandom() {
+		/*ba haramaki (x,y)yak hallabzhert u la "checkComputerChosen" checki aka ka aya aw xalla girawa yan na
+		 */
+		  isOccupied =true;
+		while(isOccupied ) {
+			X_Coordinate = r.nextInt(number);
+			Y_Coordinate = r.nextInt(number);   
+			checkComputerChosen();
+	}    }
+	public static void checkComputerChosen() {
+		/*la "FullyRandom" u "smartRandomLevelThree" bakar yat
+		 * agar(x,y)aka peshtr gira bet awa "isOccupied=true" dubara ba randomi (x,y)yaki ka adozeto
+		 */
+		if (array2d[Y_Coordinate][X_Coordinate].equals(p2.variable) || array2d[Y_Coordinate][X_Coordinate].equals(p1.variable)) {    
+			isOccupied  = true;
+		}else {	isOccupied  = false;	
+		}	}
+	public static void doFourCorners() {
+		/*la "smartRandomLevelThree" bakar yat ka bahoiyawa musta7ila la computerlvl3 bbreto la 3x3
+		 * wa la yari gawratrinakanisha har corner la lakan bashtra(i think)>>> actually WA NYA U lakan bashtra...
+		 */
+		// only used in "smartRandomLevelThree"
+		 if(!(array2d[0][0].equals(p1.variable) || array2d[0][0].equals(p2.variable))) {
+			Y_Coordinate = 0;   X_Coordinate = 0;	System.out.println("\"One 'CORNER' a day keeps the doctor away!\"");	hasComputerChosenOrNot=true;isOccupied =false;
+		}else if(!(array2d[0][number-1].equals(p1.variable) || array2d[0][number-1].equals(p2.variable))) {
+			Y_Coordinate = 0;   X_Coordinate = number-1;	System.out.println("\"One 'CORNER' a day keeps the doctor away!\"");	hasComputerChosenOrNot=true;isOccupied =false;
+		}else if(!(array2d[number-1][0].equals(p1.variable) || array2d[number-1][0].equals(p2.variable))) {
+			Y_Coordinate = number-1;   X_Coordinate = 0;	System.out.println("\"One 'CORNER' a day keeps the doctor away!\"");	hasComputerChosenOrNot=true;isOccupied =false;
+		}else if(!(array2d[number-1][number-1].equals(p1.variable) || array2d[number-1][number-1].equals(p2.variable))) {
+			Y_Coordinate = number-1;   X_Coordinate = number-1;	System.out.println("\"One 'CORNER' a day keeps the doctor away!\"");	hasComputerChosenOrNot=true;isOccupied =false;
+		}
+	}
+	public static void smartRandomLevelThree() {
+		/*ama dwai awai computer natwanet xallek ba dast benet yan regri la xallek bka awa yat bo era
+		 * lerash sarata bas ba shwen(x,y)akani "nawo" agaret agar la "nawo" hich batakk nma bu inja arwat bo suchakan(corners) inja qaraxakan 
+		 */
+		ArrayList<Integer>  insideSquare = new ArrayList<>();
+		for (int i = 1; i < number-1; i++) {	insideSquare.add(i);   }// ama tozek wrdtra// wata la {1 ta number-1-1} akata naw arrayakawa boya hich la qarax u suchakan nakat
+		Collections.shuffle(insideSquare); //bas bo awai awanai nawo ba randomi hallbzheret nak tadriji
+		  isOccupied =true;
+		  int size=insideSquare.size();
+			for (int i = 0; (i < size)&& isOccupied ; i++) { // {{&& isOccupied}}means if it found a qualifed(x,y) it should stop the loop
+				for (int j = 0; (j < size)&& isOccupied  ; j++) {
+					X_Coordinate = insideSquare.get(i);
+					Y_Coordinate = insideSquare.get(j);   
+					checkComputerChosen(); //checks if occupied or not	
+				}
+			}if(!isOccupied ) { return; } //it means if the (x,y)isn't occupied exit the method
+			//if(number==3) { doFourCorners(); } //bam shewaya bas la 3x3 corner akan prority zyatr ayate u la boardi gawra such u qarax waku yak 7sabyan bo akre
+			doFourCorners(); //ballam harchan bo boardi la {3x3 gawratr} bash nya ka corner zutr bkre ballam ka har methodakam bo 3x3 drust krdua ba bo amish bakar bet chunka "cool"a xD
+			while(isOccupied ) {       //awa bas qaraxakan u suchakan agaret u checkyan aka
+				for (int i = 0; (i < array2d.length) && isOccupied; i++) {
+					for (int j = 0; (j < array2d.length) && isOccupied; j++) {
+						if(i==0 || i==number-1 || j==0 || j==number-1) {	X_Coordinate = j;    Y_Coordinate = i; checkComputerChosen();  	}
+			}    }    }
+	}
+
+	public static void computerStatesWhatItHasChosen() {
+		/*har (x,y) akat ba yak zhmara ka awai "human"aka leyi te bgat ka chi hallbzhardua u tawaw
+		 */
+		int choiceComputer=(Y_Coordinate*number)+(X_Coordinate+1);
+		System.out.println("I will be choosing "+choiceComputer);
+	    array2d[Y_Coordinate][X_Coordinate] = p2.variable;
+	}
+
+
+	//  ComputervsPlayer Methods {ENDS}   //
+	
+	//  Shared Methods  {STARTS}  //
+
+	public static void chooseGameType() {
+		// pewist ba comment aka? xD
+		System.out.println("Enter '1' to play Player Vs Player, Or Enter '2' to play Player Vs Computer ");
+		while(true) {try {   
+			gameType=Integer.parseInt(in.next().trim()); } catch (NumberFormatException e) {
+				System.out.println("Enter again, make sure it's a number this time, '1' to play Player Vs Player, Or Enter '2' to play Player Vs Computer "); continue;
+			}
+			if(!( gameType<=2 && gameType>=1) ) {
+					System.out.println("Out of range, enter a number again, but make sure it's within range(1-2)");   
+			}	
+			else {break;}
+			  } }
+	public static void askForName(){
+		p1=new Player(vF);
+		in.nextLine();
+	System.out.println("Player, Enter a name or press \"Enter\" to have \"player 1\" as default:" );
+	p1.name=in.nextLine();
+	if(p1.name.equals("")) {
+		p1.name="Player 1";  }
+	
+	p2=new Player(vS);
+	if(gameType==2) {   p2.name=computer.name;  
+	}else{ 
+		System.out.println("Player, Enter a name or press \"Enter\" to have \"player 2\" as default:" );
+		p2.name=in.nextLine();
+		if(p2.name.equals("")) {
+			p2.name="Player 2";  } 
+	}   }
+	public static void getSize(){
+		//tanha rega ba zhmarayak adat law range'aya //continue'aka "shta muhimakaya"
+		while(true) {try {   
+			number=Integer.parseInt(in.next().trim()); } catch (NumberFormatException e) {
+			System.out.println("Enter again, make sure it's a number this time"); continue;
+		} 
+			if(!(number>=1 && number<=30)) { System.out.println("Out of range, Enter a number from (1-30)");  }
+			else {	break;		}
+			   } } 
+	public static void printBoard(){
+		//har boardaka print akat ka la maina zor bang akreto
+		System.out.print("+");
+		for(int k =0 ; k< number ; k++) {	System.out.printf("%-3s","---+");	}
+		System.out.println();  
+		for(int i =0 ; i< number ; i++) {    System.out.print("|");
+			for(int j =0 ; j< number ; j++) {	System.out.printf("%-3s|",array2d[i][j]);	}System.out.println();
+			System.out.print("+");
+		for(int j =0 ; j< number ; j++) {	System.out.printf("%-3s","---+");	}System.out.println();
+		}}
+	public static void createBoard() {
+		//drust krdni boardaka ka har indexi zhmarayaki tya be ka la {{1}}o dast pe aka ta {{numberXnumber}}
+		int just_A_number=0;
+		for(int i =0 ; i< number ; i++) {
+			for(int j =0 ; j< number ; j++) {
+				array2d[i][j]= String.valueOf(++just_A_number);
+			}	}
+	}
+	public static void isBoardFull(){
+		// la chap bo rast inja saro bo xwaro agare agar yak shwen ba batalli mabe awa "isBoardFull=false" aka
+		for(int i =0 ; i< number ; i++) {
+			for(int j =0 ; j< number ; j++) {	if(array2d[i][j].equals(p1.variable)|| array2d[i][j].equals(p2.variable)) 
+			{isBoardFull=true; }else { isBoardFull=false; return;  }	}}}
+ 
+	public static void rollTheDice(){
+		//har bo dyari krdni {{firstToStart}} u {{secondToStart}}
+		r = new Random();
+		int playerDice1=0;
+		int playerDice2=0;
+		boolean verify=false;
+	do{
+		System.out.println(p1.name+" write \"ROLL\" to roll the dice(1-6)!");
+		while(!(in.next().equals("ROLL"))) {	System.out.println(p1.name+" write \"ROLL\" correctly!");	}	
+		playerDice1=r.nextInt(6)+1;
+		System.out.println(p1.name+"'s dice result is: "+playerDice1);
+		
+		if(! (p2.name.equals(computer.name)) ) {
+		System.out.println("\n"+p2.name+" write \"ROLL\" to roll the dice(1-6)!");
+		while(!(in.next().equals("ROLL"))) {	System.out.println(p2.name+" write \"ROLL\" correctly!");   }	
+		}	System.out.println(22);
+		playerDice2=r.nextInt(6)+1;
+		System.out.println(p2.name+"'s dice result is: "+playerDice2);
+		verify=false;
+		if(playerDice1==playerDice2) {
+			System.out.println("\nHow unexpected! Both got the same RESULT, let's re-Roll: \n");     verify=true;	}
+		}while(verify);
+		firstToStart=playerDice1 > playerDice2? p1.name : p2.name;
+		secondToStart=playerDice1 < playerDice2? p1.name : p2.name;
+		System.out.println("\nFirst to start is "+firstToStart);
+		System.out.println("Second to start is "+secondToStart+"\n");
+	}
+	
+	public static int calculateVertical(String variable) {
+		/*hamuyan rek haman shewazi ish krdni 4 methodakai "computerMove"yan haya ka ba haman shewa aron
+		 * har kate 3 danayan bini basar yako ba peyi jori methodaka lam 4 danaya awa pointek ba local variablei points adre wa dwai points return akret
+		 * am 4 methodi calculate'a la layan Player1 u Player2 u compyer'o bang akreno u bo hamuyan ba haman shewa ish akat
+		 */
+		int points=0;
+		int ii=1;
+		for(int j =0 ; j< number ; j++) {
+			ii=1;	
+				if(!   ( (ii-1)<0    ) ||  (ii+1)>=number  ) {  
+							for (int k = ii; !(k+1 >= number); k++) {
+								if(  array2d[k-1][j].equals(variable) &&  array2d[k][j].equals(variable) &&   array2d[k+1][j].equals(variable)               ) {
+									points++;  k=k+3;	}else {
+										continue;
+	}	}	}   }   return points;   }
+	public static int calculateHorizontal(String variable) {
+		int points=0;
+		int j=1;
+		for(int i =0 ; i< number ; i++) {
+			j=1;
+				if(!   ((j-1)<0  ||  (j+1)>=number)   ) {
+						
+							for (int k = j; !(k+1 >= number); k++) {
+								if(  array2d[i][k-1].equals(variable) &&  array2d[i][k].equals(variable) &&  array2d[i][k+1].equals(variable)    ) {
+									points++; k=k+3;  }else {
+										continue;
+	}	}	}   }   return points;   }
+	public static int calculateDiagonalRight(String variable) {
+		int points=0;
+		int jj=1;
+		for(int i = number-1 ; i>=0 ; i--) {
+			jj=1;
+			 if(!   (  (jj-1)<0  ||  (i-1)<0     || (i+1)>=number    ||  (jj+1)>=number)    ) {
+						for (int k = i,  kk=jj; !((k+1 >= number) ||  (kk+1)>=number  )   ; kk++, k++) {
+							if( array2d[k-1][kk-1].equals(variable)  && array2d[k][kk].equals(variable)  &&   array2d[k+1][kk+1].equals(variable)        ) {
+								points++;	k=k+3;   kk=kk+3;	
+								}else {   continue; } 
+						}	}     }   
+		int ii=1;
+			for(int j =2 ; j< number ; j++) {
+				ii=1;
+			 if(!   (  (j-1)<0  ||  (ii-1)<0     || (ii+1)>=number    ||  (j+1)>=number)    ) {
+						for (int k = ii,  kk=j; !((k+1 >= number) ||  (kk+1)>=number  )   ; kk++, k++) {
+							if(   array2d[k-1][kk-1].equals(variable)  && array2d[k][kk].equals(variable)  &&   array2d[k+1][kk+1].equals(variable)) {
+								points++;	  k=k+3;   kk=kk+3;	
+						}else {   continue; } 
+							}	}   }  	return points;    }
+	public static int calculateDiagonalLeft(String variable) {
+		int points=0;
+		int jj=number-1-1;
+		for(int i = number-1 ; i>=0 ; i--) {
+			jj=number-1-1;
+			 if(!   (  (jj-1)<0  ||  (i-1)<0     || (i+1)>=number    ||  (jj+1)>=number)    ) {
+						for (int k = i,  kk=jj; !((k+1 >= number) ||  (kk-1)<0   )   ; kk--, k++) {
+							if( array2d[k-1][kk+1].equals(variable)  && array2d[k][kk].equals(variable)  &&   array2d[k+1][kk-1].equals(variable)        ) {
+								points++;	   k=k+3;   kk=kk-3; 
+								}else {   continue; }   	
+						}    }     } 
+		  
+		int ii=1;
+			for(int j =number-1-1-1  ; j>=0 ; j--) {
+				ii=1;
+			 if(!   (  (j-1)<0  ||  (ii-1)<0     || (ii+1)>=number    ||  (j+1)>=number)    ) {
+						for (int k = ii,  kk=j; !((k+1 >= number) ||  (kk-1)<0  )   ; kk--, k++) {
+							if(   array2d[k-1][kk+1].equals(variable)  && array2d[k][kk].equals(variable)  &&   array2d[k+1][kk-1].equals(variable))  {
+								points++;		k=k+3;   kk=kk-3; 
+							}  else {   continue; } 
+						} 	}   }    return points;    }
+	public static void calculateResults() {
+		// har 4 methodaka {int}ek return akan ka akata zhmarai pointakani har jorekyan
+		pointsP1=calculateVertical(p1.variable)+calculateHorizontal(p1.variable)+calculateDiagonalRight(p1.variable)+calculateDiagonalLeft(p1.variable);
+		pointsP2=calculateVertical(p2.variable)+calculateHorizontal(p2.variable)+calculateDiagonalRight(p2.variable)+calculateDiagonalLeft(p2.variable);
+	}
+
+	public static void showResult() {
+		 p1.setPoint(pointsP1);
+		 p2.setPoint(pointsP2);
+		 if( p1.points > p2.points) {                               
+			 winnerName=p1.getName(); p1.wins++;         loserName=p2.getName();  p2.loses++; 
+			System.out.println("THE WINNER IS "+winnerName+" WHO HAS "+p1.points +" POINTS");
+			System.out.println("AND THE LOSER IS "+loserName+" WHO HAS "+p2.points +" POINTS");
+		}else if( p1.points < p2.points ){                        
+			winnerName=p2.getName(); p2.wins++;        loserName=p1.getName();	p1.loses++; 
+			System.out.println("THE WINNER IS "+winnerName+" WHO HAS "+p2.points +" POINTS");
+			System.out.println("AND THE LOSER IS "+loserName+" WHO HAS "+p1.points +" POINTS");
+		}else {     System.out.println("DRAW, Both got the same result, which is "+p1.points);         }	
+	}
+	public static void askIfWantedToPlayAnotherGame_And_PreviousGameResults() {
+		System.out.println("\n\n"+p1.name+" has won "+p1.wins+" times and lost "+ p1.loses+" times");
+		System.out.println(p2.name+" has won "+p2.wins+" times and lost "+ p2.loses+" times");
+		isBoardFull=false;
+		System.out.println();
+		in.nextLine(); //pesh am nextInt();krawa boya ama pewista ka enteraka la buffer wargre
+		System.out.println("Write \"AGAIN\" If you want to play again, else write anything to EXIT\n");
+			playAgain=in.nextLine().trim();
+	}
+	//  Shared Methods  {ENDS}  //
+	
+	//  PlayerVsPlayer Methods {STARTS}  //
+
+
+	public static int getInput(){
+		//nayalet text yan out of range zhmara dyari bkret u dwai am checkChosen checki aka ka aya batalla aw xalla yan na
+		int choice;
+		while(true) {try {   
+			choice=Integer.parseInt(in.next().trim()); } catch (NumberFormatException e) {
+			System.out.println("Enter again, make sure it's a number this time, Or enter \"0\" to exit "); continue;
+		}
+		if( choice==0 ) { exitBoard=true;   break; }	
+		if(!(choice>0 && choice<=number*number)) {
+				System.out.println("Out of range, "+firstToStart+" enter a number again, Or enter \"0\" to exit ");   
+		}	
+		else {break;}
+		  }   return choice;   } 
+	public static void checkChosen(int choice){
+		/*check akat agar aw xallai ka player ekyan halli bzhardua peshtr hallbzherdra awa {{IsAlreadyChosen=true}} dakat u playeraka abe dubara hallibzhereto
+		 */
+			for(int i =0 ; i< number ; i++) {
+				if(number>=choice) { 
+					if(array2d[i][choice-1].equals(p1.variable)|| array2d[i][choice-1].equals(p2.variable)){ IsAlreadyChosen=true; 
+					System.out.println("Number Taken before, "+firstToStart+" enter another number");  break;}
+					else {break;}
+				}else { choice=choice-number;   	}   }	}
+	public static void choose(String variable){
+		//dwai awai ka zanra zhmaraka darawai range nya u peshtr hallnabzherdrawa inja zhmaraka indexi adozreto la regai aw loopai xwaro u Stringakai naw index'a hallbzherdrawaka agordre
+			for(int i =0 ; i< number ; i++) { 
+				if(number>=choiceTemp) {
+				array2d[i][choiceTemp-1]= variable;	break; 	}else { choiceTemp=choiceTemp-number;   }	}	}
+
+	
+
+
+	//  PlayerVsPlayer Methods {ENDS}  //
+	
+	
+	
+} //END OF {{GAME CLASS}}
+	
