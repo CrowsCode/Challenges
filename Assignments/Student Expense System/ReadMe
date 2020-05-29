@@ -1,6 +1,4 @@
-Only change the file path to make it work, It will automatically create the files.
-Tanha path'i file'aka bgora bo awai ish bkat, xoi fileakan drust akat.
+Only change this folder's path to make it work, It will automatically create the folder and all the other required files.
+Tanha am path'i folder'a bgora bo awai hamui ish bkat, xoi folder'aka u file'akani ka drust akat.
 
-public static  File fileUsers = new File("C:\\Users\\balen\\OneDrive\\Desktop\\Users.txt");
-public static  File fileItems = new File("C:\\Users\\balen\\OneDrive\\Desktop\\Items.txt");
-public static  File fileCheckoutHistory = new File("C:\\Users\\balen\\OneDrive\\Desktop\\CheckOutHistory.txt");
+static File path = new File("C:\\Users\\balen\\OneDrive\\Desktop\\Assignment\\Student Espense System");
