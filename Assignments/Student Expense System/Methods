@@ -136,10 +136,17 @@ public class Methods {
 			return;
 		}
 		////
+		
+		//2// resetting monthly checkout, when a user runs the program again a new date will be written in the file
+		BufferedWriter bw = new BufferedWriter(new FileWriter(Main.fileMonthlyCheckout, false));//false == overwrite
+		bw.write(0);
+		bw.close();
+		//2//
+		
 		try {	if (Main.fileCheckoutHistory.createNewFile()) 	System.out.println("Couldn't find CheckOutHistory file, as a result one has been created.");
 		} catch (IOException e1) {	e1.printStackTrace();	}
 		
-		BufferedWriter bw = new BufferedWriter(new FileWriter(Main.fileCheckoutHistory, true));
+		bw = new BufferedWriter(new FileWriter(Main.fileCheckoutHistory, true));
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
 		Date dateObj = new Date();
 		String date = dateFormat.format(dateObj);
@@ -296,6 +303,7 @@ public class Methods {
 		Main.users.get(Main.currentLoggedinUserID)
 				.setTotalBil(Main.users.get(Main.currentLoggedinUserID).getTotalBil() + Integer.parseInt(price));
 		overWrite_FileUsers_FromMap();
+			
 	}
 
 
@@ -440,7 +448,5 @@ public class Methods {
 			case 1:		return;
 			}
 		}
-	}
-
-	
+	}	
 }
