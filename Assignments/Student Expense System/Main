@@ -1,10 +1,15 @@
 package studentExpense;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -13,6 +18,7 @@ import java.util.Scanner;
 public class Main {
 	static File path = new File("C:\\Users\\balen\\OneDrive\\Desktop\\Assignment\\Student Espense System");////Tanha am path'a pewisti ba gorina////
 	
+	public static  File fileMonthlyCheckout = new File(path+"\\monthly_Checkout.txt");
 	public static  File fileUsers = new File(path+"\\Users.txt");//har rizi User'eka //username,password,ID,Totalbill// data'kan ba "," jya krawnato
 	public static  File fileItems = new File(path+"\\Items.txt");//har rizi Item'i User'eka //ItemName,ItemPrice,ItemQuantity,Date// data'i Item ka ba "," jya krawnato
 	//bas kate ka 2 item i habe awa ba "|" jya akreno  //tamata,2,1,Date|pskit,2,1,Date//
@@ -26,6 +32,28 @@ public class Main {
 	
 	static Scanner in = new Scanner(System.in);
 	
+	private static void forcedMonthlyCheckout() throws IOException {
+		Methods obj = new Methods();
+		String choice="";
+		while(true) { 
+			System.out.println("****************************************************");
+			System.out.println("****************************************************");
+			System.out.println("**               Monthly Checkout                 **");
+			System.out.println("****************************************************");
+			System.out.println("**                  [1]Checkout                   **");
+			System.out.println("****************************************************");
+			System.out.println("**More than a month has passed since last checkout**");
+			System.out.println("****************************************************");
+			System.out.println("****************************************************");
+			do{choice=in.nextLine().trim();}
+			while (!(  choice.equals("1")  ) );
+			switch(Integer.parseInt(choice)) {
+			case 1:   obj.checkout(); return;
+			}
+			System.out.println("\n\n\n");	
+		}
+	}
+	
 	public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 		
 		//Folder'ek drust akat law path'a agar nabu u agar habu awa hich naka
@@ -34,14 +62,14 @@ public class Main {
 		//1//The File's createNewFile() method creates a new, empty file named by the pathname if a file with this name does not yet exist.
 		if (fileUsers.createNewFile()) 	System.out.println("Couldn't find Users file, as a result one has been created.");
 		if (fileItems.createNewFile()) 	System.out.println("Couldn't find Items file, as a result one has been created.");
+		if (fileMonthlyCheckout.createNewFile()) 	System.out.println("Couldn't find Monthly Checkout file, as a result one has been created.");
 		//1//
 		
-		BufferedReader br;
 		String[] tempArray;
-		String temp;
+		String temp="";
 		
-		//2// User's File >> Map(Users)
-		br= new BufferedReader(new FileReader(fileUsers));
+		//2//User's File >> Map(Users)
+		BufferedReader br= new BufferedReader(new FileReader(fileUsers));
 		for(int i=0; i<maxNumberOfUsers; i++) {
 			temp=br.readLine();
 			if(temp!=null) {
@@ -51,9 +79,9 @@ public class Main {
 				users.put( i, new User(null, null, i, 0d));
 			}
 		}	br.close();
-		//2//
-		
-		//3// Item's File >> LinkedList<LinkedList<String>>
+		//2// 
+			
+		//3//  Item's File >> LinkedList<LinkedList<String>>
 		br= new BufferedReader(new FileReader(Main.fileItems));
 		for (int i = 0; i < maxNumberOfUsers; i++) { 
 			items.add(new LinkedList<String>());
@@ -67,6 +95,29 @@ public class Main {
 		}	br.close();
 		//3//
 		
+		//4//Monthly Checkout
+		br= new BufferedReader(new FileReader(fileMonthlyCheckout));
+		temp= br.readLine(); 
+		br.close();
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");//1==month//2==year
+		Date dateObj = new Date();
+		String[] currentDateArray;
+		if(temp==null ||temp.length() < 5) {//three possibilities//written "0" in it after a previous checkout, a date or even null// 5 because it's a round* number
+			BufferedWriter bw = new BufferedWriter(new FileWriter(fileMonthlyCheckout, false));// false == overwrites
+			bw.write(   dateFormat.format(dateObj)    );
+			bw.close();
+		}else {
+			String[] filetDateArray = temp.split("/");
+			currentDateArray = dateFormat.format(dateObj).split("/");
+			if(   Integer.parseInt(currentDateArray[2]) > Integer.parseInt(filetDateArray[2])  )  forcedMonthlyCheckout();//more than a year
+			
+			else if(   Integer.parseInt(currentDateArray[2]) == Integer.parseInt(filetDateArray[2])   ) //same year
+					if(   (  Integer.parseInt(currentDateArray[1]) - Integer.parseInt(filetDateArray[1])  ) > 1       )  forcedMonthlyCheckout();//more than one month
+			
+			else System.out.println("Monthly checkout's time hasn't came up yet");
+		}
+		//4//
+
 		Methods obj = new Methods();
 		in = new Scanner(System.in);
 		String choice="";
@@ -83,7 +134,7 @@ public class Main {
 			System.out.println("***************************************************");
 			System.out.println("***************************************************");
 			do{choice=in.nextLine().trim();}
-			while (!(  choice.equals("1") || choice.equals("2") || choice.equals("3") || choice.equals("4")  ) );//loops until a number is entered
+			while (!(  choice.equals("1") || choice.equals("2") || choice.equals("3") || choice.equals("4")  ) );
 			System.out.println("\n\n\n");
 			switch(Integer.parseInt(choice)) {
 			case 1:  obj.signUp(); break;  
@@ -92,8 +143,6 @@ public class Main {
 			case 4:  break exitProgram;  
 			}
 			System.out.println("\n\n");	
-		}
-		
-		
+		}		
 	}
 }
