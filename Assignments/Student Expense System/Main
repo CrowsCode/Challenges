@@ -32,6 +32,8 @@ public class Main {
 	
 	static Scanner in = new Scanner(System.in);
 	
+	
+	
 	private static void forcedMonthlyCheckout() throws IOException {
 		Methods obj = new Methods();
 		String choice="";
@@ -81,6 +83,8 @@ public class Main {
 		}	br.close();
 		//2// 
 			
+		
+		
 		//3//  Item's File >> LinkedList<LinkedList<String>>
 		br= new BufferedReader(new FileReader(Main.fileItems));
 		for (int i = 0; i < maxNumberOfUsers; i++) { 
@@ -97,7 +101,7 @@ public class Main {
 		
 		//4//Monthly Checkout
 		br= new BufferedReader(new FileReader(fileMonthlyCheckout));
-		temp= br.readLine(); 
+		temp= br.readLine();  
 		br.close();
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");//1==month//2==year
 		Date dateObj = new Date();
@@ -109,15 +113,19 @@ public class Main {
 		}else {
 			String[] filetDateArray = temp.split("/");
 			currentDateArray = dateFormat.format(dateObj).split("/");
-			if(   Integer.parseInt(currentDateArray[2]) > Integer.parseInt(filetDateArray[2])  )  forcedMonthlyCheckout();//more than a year
+			if(   Integer.parseInt(currentDateArray[2]) > Integer.parseInt(filetDateArray[2])  )  
+				forcedMonthlyCheckout();//more than a year
 			
-			else if(   Integer.parseInt(currentDateArray[2]) == Integer.parseInt(filetDateArray[2])   ) //same year
-					if(   (  Integer.parseInt(currentDateArray[1]) - Integer.parseInt(filetDateArray[1])  ) > 1       )  forcedMonthlyCheckout();//more than one month
-			
+			else if(   Integer.parseInt(currentDateArray[2]) == Integer.parseInt(filetDateArray[2])   ) { //same year
+				if(   (  Integer.parseInt(currentDateArray[1]) - Integer.parseInt(filetDateArray[1])  ) > 1       )  
+					forcedMonthlyCheckout();//more than one month
+				else if(   ((  Integer.parseInt(currentDateArray[1]) - Integer.parseInt(filetDateArray[1])  ) == 1 ) && (  Integer.parseInt(currentDateArray[0]) > Integer.parseInt(filetDateArray[0])  )     )//month + 1day
+					forcedMonthlyCheckout();
+			}
 			else System.out.println("Monthly checkout's time hasn't came up yet");
 		}
 		//4//
-
+		
 		Methods obj = new Methods();
 		in = new Scanner(System.in);
 		String choice="";
@@ -143,6 +151,10 @@ public class Main {
 			case 4:  break exitProgram;  
 			}
 			System.out.println("\n\n");	
-		}		
+		}
+		
+		
 	}
+
+
 }
