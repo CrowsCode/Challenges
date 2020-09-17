@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="promodo.css">
+    <script src="promodo.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css"
+        integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div id="clock">
+
+
+        <header>Pomodoro Clock</header>
+
+        <div id="break-session">
+            <div id="break">
+                <div id="break-label">Break Length</div>
+                <div id="breakIncraseLengrthDecrease">
+                    <button onclick="changeBreak(-1)" id="break-decrement">
+                        <i class="fa fa-arrow-down"></i>
+                    </button>
+                    <div id="break-length">5</div>
+                    <button onclick="changeBreak(1)" id="break-increment">
+                        <i class="fa fa-arrow-up"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="session">
+                
+                <div id="session-label">Session Length</div>
+                <div id="sessionIncraseLengrthDecrease">
+                    <button onclick="changeSession(-1)" id="session-decrement">
+                        <i class="fa fa-arrow-down"></i>
+                    </button>
+                    <div id="session-length">25</div>
+                    <button onclick="changeSession(1)" id="session-increment">
+                        <i class="fa fa-arrow-up"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="time">
+            <div id="timer-label">Session</div>
+            <div id="time-left">
+                <input id="minutes" type="number" readonly="readonly" value="25">
+                <span id="colon">:</span>
+                <input id="seconds" type="number" readonly="readonly" value="00">
+            </div>
+            <div id="buttons">
+                <button onclick="start()" id="start">
+                    <i class="fa fa-play"></i>
+                </button>
+                <button onclick="pause()" id="pause">
+                    <i class="fa fa-pause"></i>
+                </button>
+                
+                <button onclick="reset()" id="reset">
+                    <i class="fa fa-sync"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
