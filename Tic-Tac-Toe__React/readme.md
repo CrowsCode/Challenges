@@ -15,4 +15,4 @@ One has to create an account to be able to play.
 <img src="ScreenShots/r6.png" width="75%">
 <img src="ScreenShots/r7.png" width="75%">
 <img src="ScreenShots/r8.png" width="75%">
-<img src="ScreenShots/orders1.png" width="75%">
+<img src="ScreenShots/r8.png" width="75%">
