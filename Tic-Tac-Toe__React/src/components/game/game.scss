@@ -1,0 +1,693 @@
+@import '../styles/all';
+
+
+
+
+ 
+#game-container{   
+    width: $container-width;
+    height: $container-height;
+
+    margin: 3vh auto 0 auto;
+    
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    @include box-shadow ($secondary-color-container, $secondary-color-dark4, 0.3);
+}
+
+
+#g-message{
+
+
+    #g-message-check-button{
+
+        &:checked ~ #g-message-background{
+            display: flex;
+        }
+        &:not(:checked) ~ #g-message-background{
+            display: none;
+        }
+    }
+    #g-message-background{
+        position: absolute;
+        top: $nav-height;
+        left: 0;
+    
+        width: 100vw;
+        height: 100vh;
+
+        cursor: pointer;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    
+        background-color: rgba($secondary-color-container, 0.6);
+        #g-message-container{
+            position: absolute;
+            top:  15%; //top akai la top: $nav-height; dast pe aka
+            border-radius: 50px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+
+            @include box-shadow-inverse (rgba($secondary-color-normal1, 0.9), $secondary-color-dark4, 0.9);
+          
+            #g-message-1{
+                display: none;
+            
+                padding: 4% 8%;
+                margin: 10% 5%;
+                border-radius: 50px;
+
+                font-family: 'Concert One', cursive;
+                font-size: 2.2vmin;
+                font-size: clamp(2.2vmin, 14px, 2.5vmin);
+                font-weight: bold;
+
+                @include box-shadow-inverse (rgba($secondary-color-normal2, 0.9), $secondary-color-dark4, 0.4);
+            }
+            #g-message-2-div{
+     
+                padding: 4% 8%;
+                margin: 5% 5%;
+
+                border-radius: 50px;
+
+                @include box-shadow-inverse (rgba($secondary-color-normal2, 0.9), $secondary-color-dark4, 0.4);
+                
+                #g-message-2-div-1, #g-message-2-div-2, #g-message-2-div-3, #g-message-2-div-4{
+                    display: none;
+                    margin-bottom: 5%;
+
+                    font-family: 'Concert One', cursive;
+                    font-size: 2.2vmin;
+                    font-size: clamp(2.2vmin, 14px, 2.5vmin);
+                    font-weight: bold;
+                }
+                #g-message-2-div-4{
+                    color: $secondary-color-light1;
+                }
+            }
+
+        }
+    }
+}
+
+
+
+///////////////////////////////////////////////////////////////////
+.go-playerorComputer-button, #currentGame-continueCurrentGame-button, #goBack-button, #form-submit, #continueCurrentGame-button{
+    padding: 1% 5%;
+
+    border-radius: 50px;
+
+    cursor: pointer; 
+    outline: none;
+
+    font-size: 3.5vmin;
+    font-size: clamp(3.5vmin, 20px, 4vmin);
+    font-weight: bolder;
+
+    transition: all 0.2s linear 0s;
+
+    color: $secondary-color-dark4;
+    @include box-shadow-inverse ($secondary-color-light1, $secondary-color-dark4, 0.4);
+    
+    &:hover , &:active{
+        transition: all 0.2s linear 0s;
+
+        color: $secondary-color-light1;
+        @include box-shadow-inverse ($secondary-color-dark4, $secondary-color-dark4, 0.4);
+    }
+}
+
+#currentGame-continueCurrentGame-button, #goBack-button{
+    color: $secondary-color-light1;
+    @include box-shadow-inverse ($secondary-color-dark4, $secondary-color-dark4, 0.4);
+
+    &:hover , &:active{
+        color: $secondary-color-dark4;
+        @include box-shadow-inverse ($secondary-color-light1, $secondary-color-dark4, 0.4);
+    }
+}
+///////////////////////////////////////////////////////////////////
+#goBack-button{
+  
+}
+///////////////////////////////////////////////////////////////////
+
+#title{
+    display: grid;
+    place-items: center;//horizontal+vertical center
+
+    font-family: 'Concert One', cursive;
+    font-size: 6vmin;
+    font-size: clamp(6vmin, 24px, 6.5vmin);
+    color: $secondary-color-title;
+    font-weight: bolder; 
+}
+
+
+
+#game-box{
+    width: 80%;
+    height: 70%;
+
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    
+
+    @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);
+}
+///////////////////////////////////////////////////////////////////
+#g-message{
+    text-align: center;
+
+    font-size: 4vmin;
+    font-size: clamp(4vmin, 18px, 4.5vmin);
+    color:solid 1px $secondary-color-dark4;
+}
+
+#currentGame{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    #currentGame-continueCurrentGame-button, #goBack-button{
+        font-size: 2.5vmin;
+        font-size: clamp(2.5vmin, 18px, 3vmin);
+        font-weight: bolder;
+        &:hover , &:active{    }
+    }
+    #currentGame-details{
+        width: 100%;
+        height: 70%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        
+        text-align: center;//wai le aka agar bcheta rizeki kash awa har la nawarasto dast pe aka
+        
+        #currentGame-details-result{
+            font-size: 2.2vmin;
+            font-size: clamp(2.2vmin, 14px, 2.5vmin);
+            font-weight: bold;
+        }
+        #currentGame-details-gameResult{
+            font-size: 1.8vmin;
+            font-size: clamp(1.8vmin, 12px, 2vmin);
+        }
+        .currentGame-details-other{
+            font-size: 2.2vmin;
+            font-size: clamp(2.2vmin, 14px, 2.5vmin);
+        }
+        #currentGame-details-time{
+            font-size: 1.8vmin;
+            font-size: clamp(1.8vmin, 12px, 2vmin);
+        }
+    }
+}
+
+///////////////////////////////////////////////////////////////////
+// #goBack-button{  }
+// .go-playerorComputer-button{  }   
+///////////////////////////////////////////////////////////////////
+#name-symbol-color{
+    width: 100%;
+   
+   
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+  
+
+.inputs-player, .inputs-player--computer{
+    width: 40%;
+
+    padding: 2% 3%;
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 1.8vmin;
+    font-size: clamp(1.8vmin, 12px, 2vmin);
+
+    @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.4);
+
+    .name{
+        width: 100%;
+        height: 40%;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center; 
+        //.name-input-label{    }
+        .name-input{
+            width: 70%; 
+            text-align: center;
+
+            border-radius: 50px;
+            outline: none;
+
+            font-size: 2.3vmin;
+            font-size: clamp(2.3vmin, 14px, 2.5vmin);
+        }
+    }
+    .symbol-color{
+        width: 100%;
+        height: 40%;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .symbol{
+            width: 50%;
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            //.symbol-input-label{    }
+            .symbol-input{                    
+                width: 35%;
+                text-align: center;
+
+                border-radius: 50px;
+                outline: none;
+
+                font-size: 3vmin;
+                font-size: clamp(2.5vmin, 16px, 3vmin);
+            }
+        }
+        .color{
+            width: 40%;
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            //.color-input-label{    }
+            .color-input{
+                width: 35%;
+               
+                outline: none;
+            }
+        }
+    }     
+} 
+
+.name-input, .symbol-input, .color-input{
+    background-color: $secondary-color-light2 !important;
+    color: $secondary-color-dark4 !important;
+    &:hover, :active{
+        background-color: $secondary-color-dark4 !important;
+        color: $secondary-color-light2 !important;
+    }
+}
+////////
+#turn-button, .size-button{
+    width: 25%;
+
+    border-radius: 50px;   
+
+    outline: none;
+    cursor: pointer; 
+
+    font-size: 3vmin;
+    font-size: clamp(3vmin, 16px, 4vmin);
+    
+    transition: all 0.2s linear 0s;
+
+    @include box-shadow-inverse ($secondary-color-bright2, $secondary-color-dark4, 0.4);
+
+    &:hover{
+        box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+
+        background-color: $secondary-color-dark4;
+        color: $secondary-color-light1;
+        text-align: center;
+
+        transform: scale(1.2);
+        transition: all 0.2s linear 0s;
+    }
+}
+
+
+#turn{
+    width: 80%;
+    height: 15%;
+
+    border-radius: 25px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    font-size: 1.5vmin;
+    font-size: clamp(1.5vmin, 14px, 2vmin);
+
+    @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.4);
+
+    //#turn-button{    }
+    .turn-player{
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        font-size: 2.3vmin;
+        font-size: clamp(2.3vmin, 14px, 2.5vmin);
+        .turn-text{        
+            color: rgb(40, 15, 129);
+            font-size: 2vmin;
+        }
+        .turn-inBetween-text{
+            color: rgb(43, 41, 41);
+        }
+    }
+}
+////
+#size{
+    width: 40%;
+    height: 12%;
+
+    border-radius: 25px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.4);
+
+    //.size-button{     } 
+    #size-text{
+        padding: 2% 4%;
+        
+        font-size: 4vmin;
+        font-size: clamp(4vmin, 20px, 4.5vmin);
+        font-weight: bolder;
+    }  
+}
+////computer related
+.inputs-player--computer{//lasaro style akani kai pe drawa
+    width: 80% !important;
+}
+#difficulty{
+    width: 50%;
+    height: 15%;
+
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.4);
+    
+    .difficulty-div{
+        width: 80%;
+        height: 100%;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .input-radio{
+            cursor: pointer;
+        }
+        .input-radio-label{
+            font-size: 2vmin;
+            font-size: clamp(2vmin, 16px, 2.3vmin);
+        }
+       
+    }
+}
+////
+#form-submit{
+    height: 12%;
+
+    font-size: 2vmin;
+    font-size: clamp(2vmin, 16px, 2.3vmin);
+}
+///////////////////////////////////////////////////////////////////
+.player1_scores_point{
+    @include box-shadow-inverse ($secondary-color-light1, white, 1);
+
+   
+    transform: scale(1.05);
+    border-radius: 10px;
+}
+.player2_scores_point{
+    @include box-shadow-inverse ($secondary-color-light1, white, 1);
+
+
+    transform: scale(1.05);
+    border-radius: 10px;
+}
+///////////////////////////////////////////////////////////////////
+#game-container-container{
+    width: 90%;
+    height: 90%;
+
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);
+}
+
+
+#player-details{
+    width: 80%  ;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .player-details-eachUser{
+        height: 100%;
+
+        margin-bottom: 3%;
+        padding: 0 8%;
+
+        border-radius: 25px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        background-color: $secondary-color-light1;
+        font-size: 1.7vmin;
+        font-size: clamp(1.7vmin, 14px, 2vmin);
+
+        @include box-shadow-inverse ($secondary-color-light1, $secondary-color-dark4, 0.4);
+
+        .player-details-name{
+            font-family: 'Concert One', cursive;
+            font-weight: bolder;
+        }
+        .player-details-points-stuff{
+            .player-details-inBetweenText{
+
+            }
+            .player-details-points{
+                font-weight: bold;
+              
+            }
+        }   
+    }
+}
+
+
+#cell-container{
+    display: grid;
+
+    width: 80%  ;
+    height: 70%;
+
+
+    @include box-shadow ($secondary-color-container, $secondary-color-dark4, 0.5);
+    .cell{
+        font-size: 1.7vmin;
+        font-size: clamp(1.7vmin, 14px, 2vmin);
+        @include box-shadow-inverse ($secondary-color-light1, $secondary-color-dark4, 0.4);
+    }
+}
+
+
+
+
+
+
+#underBoard{
+    width: 100%;
+    height: 10%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+
+    #underBoard-buttons{
+        width: 100%;
+
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        .underBoard-button{
+            width: 20%;
+  
+        
+            border-radius: 50px;
+
+            cursor: pointer; 
+            outline: none;
+
+            font-size: 2vmin;
+            font-size: clamp(2vmin, 14px, 2.5vmin);
+            font-weight: bolder;
+
+            transition: all 0.2s linear 0s;
+
+            color: $secondary-color-dark4;
+            @include box-shadow-inverse ($secondary-color-light1, $secondary-color-dark4, 0.4);
+            
+            &:hover , &:active{
+                box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+                transition: all 0.2s linear 0s;
+
+                color: $secondary-color-light1;
+                @include box-shadow-inverse ($secondary-color-dark4, $secondary-color-dark4, 0.4);
+            }
+        }
+    }
+    #underBoard-details{
+        width: 100%;
+
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        #underBoard-details-gainedXp{
+            font-size: 2vmin;
+            font-size: clamp(2vmin, 14px, 2.5vmin);
+            font-weight: bold;
+        }
+        #underBoard-details-time{
+            color: $secondary-color-light1;
+
+            font-size: 1.5vmin;
+            font-size: clamp(1.5vmin, 14px, 2vmin);
+            font-weight: bold;
+        }
+        #underBoard-details-turn{
+            font-size: 2vmin;
+            font-size: clamp(2vmin, 12px, 2.5vmin);
+            font-weight: bold;
+            #underBoard-details-turn-inBetweenText{
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+
+#gamResult{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    #gamResult-text{
+        font-size: 2.2vmin;
+        font-size: clamp(2.2vmin, 14px, 2.5vmin);
+        font-weight: bolder;
+        color: $secondary-color-dark4;
+    }
+    #gamResult-bonusLevelXp{
+        font-size: 2.2vmin;
+        font-size: clamp(2.2vmin, 14px, 2.5vmin);
+        font-weight: bolder;    
+        color: $secondary-color-dark4;
+    }
+}
+///////////////////////////////////////////////////////////////////
+@media (max-width: 900px){
+
+    #name-symbol-color{
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .inputs-player{
+        width: 80% !important;
+        height: 30% !important;
+        .name-input{
+            width: 50% !important;
+        }
+    }
+}
+
+
+@media (max-width: 800px){
+    #game-container{
+        width:  $container-1-media-width;
+        height: $container-1-media-height;
+    }
+}
+@media (max-width: 700px){
+    #game-container{
+        width:  $container-2-media-width;
+        height: $container-2-media-height;
+    }
+}
+@media (max-width: 600px){
+    #game-container{
+        width:  $container-3-media-width;
+        height: $container-3-media-height;
+    }
+}
+@media (max-width: 500px){
+    #game-container{
+        width:  $container-4-media-width;
+        height: $container-4-media-height;
+    }
+    
+}
+@media (max-width: 450px){
+    #game-container{
+        width:  $container-5-media-width;
+        height: $container-5-media-height;
+    }  
+}

@@ -1,0 +1,152 @@
+@import '../styles/all';
+
+#loading-container{
+    position: relative;
+
+    width: $container-width;
+    min-height: $container-height;
+
+    margin: 3vh auto 0 auto;
+
+    border-radius: 25px;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @include box-shadow ($secondary-color-container, $secondary-color-dark4, 0.3);
+} 
+
+    #loading-text{
+        position: absolute;
+        
+        padding: 2% 5%;
+        border-radius: 50px;
+    
+        font-family: 'Concert One', cursive;
+        font-size: 4vmin;
+        font-size: clamp(4vmin, 30px, 5vmin);
+        
+        animation-name: loading;
+        animation-timing-function: linear;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+
+        @include box-shadow-inverse ($secondary-color-bright1, $secondary-color-dark4, 0.4);
+    }
+    
+
+
+#loading-dots{
+    width: 100%; //baqadar container
+    #loading-dot{
+        position: absolute;
+        
+        width:   10vmin;
+        height:   10vmin;
+
+        border-radius: 100%;
+        
+        animation-name: dot;
+        animation-timing-function: ease;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+        animation-direction: reverse;   
+        
+        // animation-direction: alternate; 
+    }
+}
+
+@keyframes dot {
+    0%  {
+            left:0px; 
+            top:0px;
+        }
+    25% {
+            left:calc( 100% - 10vmin);
+            top:0px;
+        }
+    50% {
+            left:calc( 100% - 10vmin);  
+            top: calc( 100% - 10vmin);
+            transform:rotate(360deg);
+            -moz-transform: rotate(360deg);
+            -webkit-transform: rotate(360deg);
+        }
+    75% {
+            left:0px; 
+            top: calc( 100% - 10vmin); 
+        }
+    100%{
+            left:0px; 
+            top:0px;
+            transform:rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+        }
+}//akre rotate aka 1 jar ahr 3 ki bnusm la 100% ka u degreyaka 720 be 
+
+
+@keyframes loading {
+    0%  {
+            background-color: $secondary-color-bright2; 
+            font-size: 4vmin;
+            color: $secondary-color-light2; 
+        }
+    25% {
+            background-color: $secondary-color-normal2; 
+            font-size: 5vmin;
+            color: $secondary-color-dark4; 
+        }
+    50% {
+            background-color: $secondary-color-light2; 
+            font-size: 6vmin;
+            color: $secondary-color-bright2; 
+        }
+    75% {
+            background-color: $secondary-color-normal2; 
+            font-size: 5vmin;
+            color: $secondary-color-dark4; 
+        }
+    100%{
+            background-color: $secondary-color-bright2; 
+            font-size: 4vmin;
+            color: $secondary-color-light2; 
+        }
+}
+
+////////////////////////
+@media (max-width: 800px){
+    #loading-container{
+        width:  $container-1-media-width;
+        height: $container-1-media-height;
+    }
+}
+@media (max-width: 700px){
+    #loading-container{
+        width:  $container-2-media-width;
+        height: $container-2-media-height;
+    }
+}
+@media (max-width: 600px){
+    #loading-container{
+        width:  $container-3-media-width;
+        height: $container-3-media-height;
+    }
+}
+@media (max-width: 500px){
+    #loading-container{
+        width:  $container-4-media-width;
+        height: $container-4-media-height;
+    }
+}
+@media (max-width: 450px){
+    #loading-container{
+        width:  $container-5-media-width;
+        height: $container-5-media-height;
+    }  
+}
+

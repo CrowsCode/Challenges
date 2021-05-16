@@ -1,0 +1,114 @@
+@import '../styles/all';
+
+#genericNotFound-container{
+    width: $container-width;
+    height: $container-height;
+
+    margin: 3vh auto 0 auto;
+
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @include box-shadow ($secondary-color-container, $secondary-color-dark4, 0.3);
+} 
+
+#error-stuff{
+    width: 80%;
+    height: 80%;
+
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+      
+    @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);
+
+    .error-from-div, .error-name-div, .error-message-div{
+        width: 90%;
+        padding: 3vmin 0;
+
+        border-radius: 50px;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 5%;
+
+        @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.4);
+
+        .error-from-text, .error-name-text, .error-message-text{
+            font-size: 2.5vmin;
+            font-size: clamp(2.5vmin, 14px, 3.5vmin);
+            color: $secondary-color-dark3;
+        } 
+        .error-from, .error-name,.error-message{
+            width: 50%;
+
+            text-align: center;
+
+            font-size: 2.5vmin;
+            font-size: clamp(2.5vmin, 14px, 3vmin);
+            color: $secondary-color-light1;
+        }  
+    }
+
+    .error-name-div{
+
+        .error-name-text{
+
+        } 
+        .error-name{
+            
+        }  
+    }
+ 
+    .error-message-div{
+
+        .error-message-text{
+
+        } 
+        .error-message{
+            font-size: 2vmin;
+            font-size: clamp(2vmin, 10px, 2.5vmin) !important;
+            color: $secondary-color-bright2;
+        }  
+    }
+}
+
+//////////////////////////////
+@media (max-width: 800px){
+    #genericNotFound-container{
+        width:  $container-1-media-width;
+        height: $container-1-media-height;
+    }
+}
+@media (max-width: 700px){
+    #genericNotFound-container{
+        width:  $container-2-media-width;
+        height: $container-2-media-height;
+    }
+}
+@media (max-width: 600px){
+    #genericNotFound-container{
+        width:  $container-3-media-width;
+        height: $container-3-media-height;
+    }
+}
+@media (max-width: 500px){
+    #genericNotFound-container{
+        width:  $container-4-media-width;
+        height: $container-4-media-height;
+    }   
+}
+@media (max-width: 450px){
+    #genericNotFound-container{
+        width:  $container-5-media-width;
+        height: $container-5-media-height;
+    }  
+}

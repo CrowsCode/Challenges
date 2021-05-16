@@ -1,0 +1,338 @@
+@import '../styles/all';
+
+ 
+#history-container{
+    width: $container-width;
+    min-height: $container-height;
+
+    margin: 5vh auto  5vh auto;
+    border-radius: 25px;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include box-shadow ($secondary-color-container, $secondary-color-dark4, 0.3);
+}  
+  
+
+#header-container{
+    background-color: $secondary-color-bright1;
+    border-radius: 50px 50px 0 0;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 120%; //overflow hidden m krdua bo container aka
+    height: 5vmin;
+    font-size: 3vmin;
+
+    @include box-shadow-inverse ($secondary-color-bright1, $secondary-color-dark4, 0.4);
+    
+    .header-text{
+        font-family: 'Concert One', cursive;
+        font-weight: bolder;
+    }
+}
+/////////////////
+#noneToShow-history{
+    margin-top: 30vmin;
+    padding: 1% 4%;
+
+    border-radius: 25px;
+
+    font-size: 3.5vmin;
+    font-size: clamp(3.5vmin, 17px, 4vmin);
+    color: $secondary-color-light1;
+
+    @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);
+}
+
+.docBox{
+    width: 85%;
+    height: 35vh;
+
+    //margin-bottom: 5vmin;
+    margin: 3vmin 0;
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);
+}
+
+
+
+
+.docBox-2-half{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    
+   
+}
+
+
+.remove{
+    width: 5vmin;//labar font-size
+
+    padding: 1% 1%;
+    border-radius: 100%;   
+
+    outline: none;
+    cursor: pointer; 
+
+    font-size: 2.7vmin;
+    font-size: clamp(2.7vmin, 16px, 3vmin);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+                
+    transition: all 0.2s linear 0s;
+
+    @include box-shadow-inverse ($secondary-color-bright2, $secondary-color-dark4, 0.4);//normal1 aka grng nya ka ba js rangaka agordre
+ 
+    &:hover{
+        box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+
+        background-color: $secondary-color-container;
+        color: $secondary-color-light1;
+        text-align: center;
+
+        transform: scale(1.01);
+        transition: all 0.2s linear 0s;
+    }
+}
+
+
+
+.docBox-players-and-others{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    .docBox-players{
+        width: 90%;
+    
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        
+        .docBox-player{
+            width: 35%;
+    
+            
+            border-radius: 50px;
+    
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            font-size: 2.3vmin;
+            font-size: clamp(2.3vmin, 12px, 2.5vmin);
+
+            @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);
+            .docBox-player-nameSymbol{
+                width: 30%;
+    
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                .docBox-player-symbol{
+                    font-weight: bold;
+                }
+            }
+            .docBox-player-points{
+                width: 30%;
+    
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                .docBox-player-points-text{
+                   
+                }
+                .docBox-player-point{
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+    
+    
+    .docBox-others{
+        width: 90%;
+        height: 65%;
+    
+        border-radius: 25px;
+    
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+
+        font-size: 2.5vmin;
+        font-size: clamp(2.5vmin, 13px, 3vmin);
+
+        @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.4);
+
+        .docBox-size-and-gameType{
+            width: 90%;
+            height: 10%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+    
+            .docBox-size-stuff{                       
+    
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+    
+                .docBox-size-text{
+            
+                }
+                .docBox-size{
+            
+                }
+            } 
+            .docBox-gameType{
+                padding: 0.5% 3%;
+
+                border-radius: 25px;
+                
+                font-size: 2.2vmin;
+                font-size: clamp(2.2vmin, 12px, 2.6vmin);
+                @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);//normal1 aka grng nya ka ba js rangaka agordre
+            } 
+        }
+        
+        
+        .docBox-time-stuff{
+            width: 90%;
+            height: 15%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+    
+            font-size: 2.2vmin;
+            font-size: clamp(2.2vmin, 12px, 2.6vmin);
+            .docBox-time-text{
+        
+            }
+            .docBox-time{
+        
+            }
+        }
+        
+        
+        .docBox-startedAt-stuff{
+            width: 90%;
+            height: 15%;
+    
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+    
+            font-size: 2.1vmin;
+            font-size: clamp(2.1vmin, 11px, 2.5vmin);
+            .docBox-startedAt-text{
+        
+            }
+            .docBox-startedAt{
+        
+            }
+        }
+        
+        .docBox-gainedXp-stuff{
+            width: 90%;
+            height: 15%;
+    
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+    
+            .docBox-gainedXp-text{
+        
+            }
+            .docBox-gainedXp{
+        
+            }
+        }
+        
+        
+        .docBox-gameResult-stuff{
+            width:  50%;
+
+            border-radius: 50px;
+    
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+    
+            font-size: 2.3vmin;
+            font-size: clamp(2.3vmin, 12px, 2.5vmin);
+
+            @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);//normal1 aka grng nya ka ba js rangaka agordre
+ 
+            .docBox-gameResult-text{
+
+               
+            }
+            .docBox-gameResult{
+            
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+////////////////////////
+@media (max-width: 800px){
+    #history-container{
+        width:  $container-1-media-width;
+        min-height: $container-1-media-height;
+    }
+}
+@media (max-width: 700px){
+    #history-container{
+        width:  $container-2-media-width;
+        min-height: $container-2-media-height;
+    }
+}
+@media (max-width: 600px){
+    #history-container{
+        width:  $container-3-media-width;
+        min-height: $container-3-media-height;
+    }
+}
+@media (max-width: 500px){
+    #history-container{
+        width:  $container-4-media-width;
+        min-height: $container-4-media-height;
+    }
+    
+}
+@media (max-width: 450px){
+    #history-container{
+        width:  $container-5-media-width;
+        min-height: $container-5-media-height;
+    }  
+}

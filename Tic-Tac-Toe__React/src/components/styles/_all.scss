@@ -1,0 +1,70 @@
+$nav-height : 10vh;
+
+
+
+
+$container-width : 55vw;
+$container-height : 75vh;
+
+$container-1-media-width : 60vw;
+$container-1-media-height : 77vh;
+
+$container-2-media-width : 65vw;
+$container-2-media-height : 79vh;
+
+$container-3-media-width : 75vw;
+$container-3-media-height : 81vh;
+
+
+$container-4-media-width : 85vw;
+$container-4-media-height : 83vh;
+
+$container-5-media-width : 90vw;
+$container-5-media-height : 84vh;
+
+
+
+
+$secondary-color-background: #726a77;//backg
+$secondary-color-container: #3b3b3b;//back pro
+
+$secondary-color-light1: #c7bebc;
+$secondary-color-light2: #f7f7f7;
+
+$secondary-color-dark1: #969494;
+$secondary-color-dark2: #665f5f;
+$secondary-color-dark3: #464242;
+$secondary-color-dark4: #2a2a2a;//background nav
+$secondary-color-normal1: #c07742;
+$secondary-color-normal2: #ef802f;
+$secondary-color-bright1: #ffcc57;
+$secondary-color-bright2: #f3b117;
+
+$secondary-color-logo-menu-dropdown: #f3b117; 
+$secondary-color-title: #f3b117; 
+
+
+
+
+
+@mixin box-shadow ($base-color, $second-color, $rate: 0.2) {
+    background-color:  $base-color;
+    box-shadow: 5px 5px 10px $second-color, -5px -5px 10px rgba($base-color, $rate);
+
+    -webkit-box-shadow: 5px 5px 10px $second-color, -5px -5px 10px rgba($base-color, $rate);
+    -moz-box-shadow: 5px 5px 10px $second-color, -5px -5px 10px rgba($base-color, $rate);  
+}
+
+@mixin box-shadow-inverse ($base-color, $second-color, $rate: 0.5) {
+    background-color:  $base-color;
+    box-shadow: inset -1px -1px 10px rgba($second-color, $rate), inset 1px 1px 10px rgba($second-color, $rate),
+    5px 5px 10px rgba($second-color, $rate);
+    
+    -webkit-box-shadow: inset -1px -1px 10px rgba($second-color, $rate), inset 1px 1px 10px rgba($second-color, $rate),
+    5px 5px 10px rgba($second-color, $rate);
+    -moz-box-shadow: inset -1px -1px 10px rgba($second-color, $rate), inset 1px 1px 10px rgba($second-color, $rate),
+    5px 5px 10px rgba($second-color, $rate);               
+}
+
+
+

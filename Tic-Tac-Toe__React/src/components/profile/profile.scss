@@ -1,0 +1,600 @@
+@import '../styles/all';
+
+$name-bio-gender-location-width: 55%;
+$photo-level-gameResults-width: 35%;
+
+#profile-container{
+    width: $container-width;
+    height: $container-height;
+   
+    overflow: hidden;
+
+    margin: 3vh auto 0 auto;
+    border-radius: 25px;
+
+    display: flex;
+    justify-content: space-evenly;
+
+    @include box-shadow ($secondary-color-container, $secondary-color-dark4, 0.3);
+}
+
+  
+
+.hide {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+ }
+////////////////////////
+
+#name-bio-gender-location{
+    width: $name-bio-gender-location-width;
+    height: 85%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-items: center;
+    .p-section{
+        width: 100%;
+        height: 15%;
+
+        overflow: hidden;
+
+        border-radius: 15px;
+
+        @include box-shadow-inverse ($secondary-color-bright2, $secondary-color-dark4, 0.4);
+    }
+    .p-section-bio{
+        height: 18%;
+    }
+}
+
+
+
+.p-section-edits{
+    height: 30%;
+    padding: 3px 8px 0 8px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .p-check-button{
+        display: none;
+        outline: none;
+        &:checked ~ .p-section-edits-popup-background{
+            display: flex;
+        }
+        &:not(:checked) ~ .p-section-edits-popup-background{
+            display: none;
+        }
+    }
+    .p-check-header-text{
+        font-size: 2.5vmin;
+        font-size: clamp(2.5vmin, 16px, 3vmin);
+    }
+    .p-check-label{
+        font-size: 2.5vmin;
+        font-size: clamp(2.5vmin, 16px, 3vmin);
+        cursor: pointer;
+
+        transition: all 0.2s linear 0s;
+        &:hover{
+            box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+            color: rgb(196, 189, 189);
+            transform: scale(1.01);
+            transition: all 0.2s linear 0s;
+        }
+    }
+    .p-section-edits-popup-background{
+        position: absolute;
+        top: $nav-height;
+        left: 0;
+
+        width: 100vw;
+        height: 100vh-$nav-height;
+
+        z-index: 1;
+        cursor: pointer;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: rgba(black, 0.7);
+        .p-section-edits-popup-container{    
+            width: 25vw;
+            height: 40vh;
+
+            border: 1px solid black;
+            border-radius: 50px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly; 
+            align-items: center;
+               
+            @include box-shadow-inverse ($secondary-color-bright2, $secondary-color-dark4, 0.8);
+
+           
+            .p-section-edits-popup-div{
+                position: relative;
+
+                width: 75%;
+                height: 30%;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly; 
+                align-items: center;
+
+                #p-result-name{
+                    position: absolute;
+                    bottom: -60%;
+                    
+                    text-align: center;
+                
+                    font-size: 1.5vmin;
+                    font-size: clamp(1.5vmin, 12px, 1.7vmin);
+                    font-weight: bolder;
+                }
+                .p-hint{
+                    display: none;
+
+                    position: absolute;
+                    bottom: -30%;
+            
+                    text-align: center;
+                    color: rgba($secondary-color-light2, 0.6);
+                    font-size: 1.3vmin;
+                    font-size: clamp(1.3vmin, 12px, 1.5vmin);
+                }
+                &:hover    .p-hint{
+                    display: block;
+                }
+                .p-section-edits-popup-label{
+                    font-size: 4vmin;
+                    font-size: clamp(4vmin, 20px, 5vmin);
+                }
+                .p-section-edits-popup-input{// dw dana
+                    width: 100%;
+                    height: 35%;
+
+                    outline: none;
+
+                    padding: 1% 5%;
+                    border-radius: 15px;
+                    
+                    font-size: 2vmin;
+                    font-size: clamp(2vmin, 12px, 3vmin);
+                }
+
+                .p-section-edits-popup-input-textarea{//yak dana
+                    width: 100%;
+                    height: 65%;
+
+                    padding: 1% 5%;
+                    border-radius: 15px;                 
+
+                    outline: none;
+                    overflow: hidden;
+                    resize: none;
+                    
+                    font-size: 2vmin;
+                    font-size: clamp(2vmin, 12px, 3vmin);
+
+                }
+            }
+               
+            .p-section-edits-popup-divs-radio{
+                height: 60%;
+                width: 100%;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly; 
+                align-items: center;
+                .p-section-edits-popup-div-radio{
+                    width: 60%;
+                    height: 100%;
+
+                    display: flex;
+                    justify-content: space-between; 
+                    align-items: center;
+                    .p-section-edits-popup-label-radio{
+                        font-size: 1.8vmin;
+                        font-size: clamp(1.8vmin, 11px, 2.2vmin);
+                    }
+                    .p-section-edits-popup-input-radio{//yak dana
+                        width: 14px;
+                        height: 14px;     
+
+                        outline: none;          
+                    }
+                }
+            }
+            .p-section-edits-popup-buttons{
+                width: 80%;
+
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                .p-section-edits-popup-button-save, .p-section-edits-popup-button-close{
+                    padding: 2% 5%;
+                    border-radius: 50px;
+
+                    outline: none;
+                    
+                    font-size: 3vmin;
+                    font-size: clamp(3vmin, 16px, 3.5vmin);
+
+                    transition: all 0.2s linear 0s;
+                    &:hover{
+                        box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+                        color: $secondary-color-light1;
+                        transform: scale(1.01);
+                        transition: all 0.2s linear 0s;
+
+                        @include box-shadow ($secondary-color-container, $secondary-color-dark4, 0.3);
+                    }
+                }
+                .p-section-edits-popup-button-save{
+                    @include box-shadow (rgb(12, 131, 12), $secondary-color-dark4, 0.3);
+                }
+                .p-section-edits-popup-button-close{
+                    @include box-shadow (rgb(131, 23, 23), $secondary-color-dark4, 0.3);
+                }
+            }
+        }
+    }
+}
+.p-section-display, .p-section-display-bio{
+    height: 100%;//overflow hidden a kesha nya//ama bo away ka display* aka ba tawawi fill ka
+    padding: 0 1.5vmin;
+
+    border-radius: 0 0 15px 15px;
+   
+    font-size: 2.3vmin;
+    font-size: clamp(2.3vmin, 15px, 3.5vmin);
+
+    @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);
+}
+.p-section-display-bio{
+    font-size: 2vmin;
+    font-size: clamp(2vmin, 12px, 3vmin) !important;
+}
+
+////////////////////////
+#p-photo-level-gameResults{
+    width: $photo-level-gameResults-width;
+    height: 85%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly; 
+    align-items: center; 
+}
+#p-photo-stuff{  
+    width: 100%;
+    height: 30%;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly; 
+    align-items: center;
+
+
+    @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);
+    
+    #p-upload-stuff{
+        width: 60%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; 
+
+        align-items: center;
+        #p-upload-photo-text{
+            cursor: pointer;
+            padding: 2% 10%;
+
+            border-radius: 15px;
+        
+            font-size: 1.7vmin;
+            font-size: clamp(1.7vmin, 13px, 2vmin);
+            text-align: center; 
+
+            transition: all 0.2s linear 0s;
+
+            @include box-shadow-inverse ($secondary-color-bright2, $secondary-color-dark4, 0.4);
+
+            &:hover{
+                box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+                background-color: $secondary-color-container;
+                color: $secondary-color-light1;
+                transform: scale(1.01);
+                transition: all 0.2s linear 0s;
+            }
+        }
+        #p-upload-progress{
+            width: 40%;
+        }
+    }
+    #p-photo{
+        width: 10vmin;
+        height: 10vmin;
+
+        // margin-bottom: 5%;
+
+        border: 2px solid black;
+        border-radius: 50%;
+    }
+}
+
+#p-level-stuff{
+    position: relative;
+
+    width: 100%;
+    height: 15%;
+
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-content: center;
+    
+    @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);
+
+    #p-level-text{
+        text-align: center;
+
+        #p-level-beforeText{
+            color: $secondary-color-bright1;
+            font-weight: bold;
+        }
+        #p-level{
+            color: $secondary-color-bright2;
+            font-weight: bolder;
+        }
+    } 
+    #p-level-progressBar{   
+        position: relative;
+     
+        width: 80%;
+        height: 30%;
+        margin: 0 auto;
+
+        overflow: hidden;
+
+        border-radius: 15px;
+    
+        //background-color:  $secondary-color-normal2;
+        @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.3);
+        
+        #p-level-progressBar-value{
+            height: 100%; 
+            width: 100%;
+
+            border-radius: 15px 0 0 15px;
+
+            background-color: green;
+        }
+        #p-level-progressBar-value-text{
+            position: absolute;
+            top: 10%;//rezhai height
+            left: 0;
+            right: 0;
+
+            text-align: center;
+            font-size: 2vmin;
+            font-size: clamp(2vmin, 12px, 3vmin);
+        }
+    }
+    #p-level-hover{
+        display: none;
+
+        position: absolute;
+        left: 50%;
+        bottom: -30%;
+        transform: translate(-50%);
+
+        padding: 1% 10%;
+        border-radius: 25px;
+
+        text-align: center;
+
+        @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.8);
+
+        #p-level-hover-percentage{
+            font-size: 2vmin;
+            font-size: clamp(2vmin, 12px, 3vmin);
+        }
+    }
+    &:hover #p-level-hover{
+        display: block;
+    }
+} 
+      
+ 
+  
+
+
+#p-gameResults{
+    position: relative;
+    
+    width: 100%;
+    height: 35%;
+
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-items: center;
+
+    @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);
+
+    .p-gameResults-gameType{
+        width: 90%;
+        height: 40%;
+
+        // border: 1px solid black;
+        border-radius: 15px;
+       
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around; 
+        align-items: center;
+
+        background-color:  $secondary-color-normal2;
+        @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.4);
+
+        .p-gameType-text{
+            font-size: 2vmin;
+            font-size: clamp(2vmin, 12px, 3vmin);
+            text-align: center;
+        }
+        .p-gameType-progressBar-and-stats{
+            width: 100%;
+            height: 40%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
+            align-items: center;
+            .p-gameType-progressBar{
+                width: 80%;
+                height: 50%;
+
+                border-radius: 15px;
+
+                @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.4);
+            }
+            .p-gameType-stats{
+                width: 90%;
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                font-size: 1.5vmin;
+                font-size: clamp(1.5vmin, 10px, 2.5vmin);
+                align-items: center;
+                .p-gameType-stats-gamesWon{
+                    color: #028502;
+                }
+                .p-gameType-stats-gamesDraw{
+                    color: #aca001;
+                }
+                .p-gameType-stats-gamesLost{
+                    color: #8d0009;
+                }
+            }
+            .p-gameType-percentages-hover{
+                width: 40%;
+
+                display: none;
+
+                position: absolute;           
+                left: 50%;
+                bottom: -20%;
+                transform: translate(-50%);
+                
+                padding: 2% 10%;
+ 
+                // border: 1px solid black;
+                border-radius: 25px;
+
+                font-size: 2vmin;
+                font-size: clamp(2vmin, 12px, 3vmin);
+                text-align: center;
+
+                @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.8);
+                
+                .p-gameType-percentages-gamesWon{
+                    color: #028502;
+                }
+                .p-gameType-percentages-gamesDraw{
+                    color: #aca001;
+                }
+                .p-gameType-percentages-gamesLost{
+                    color: #8d0009;
+                }
+            }
+            &:hover .p-gameType-percentages-hover{
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;   
+            }          
+        } 
+    }
+}
+
+
+@media (max-width: 800px){
+    #profile-container{
+        width:  $container-1-media-width;
+        height: $container-1-media-height;
+    }
+    .p-section-edits-popup-container{
+        width: 35vw !important;    
+        height: 50vh !important;
+    }
+    #p-photo{
+        width: 13vmin !important;
+        height: 13vmin !important;
+    }
+}
+@media (max-width: 700px){
+    #profile-container{
+        width:  $container-2-media-width;
+        height: $container-2-media-height;
+    }
+    .p-section-edits-popup-container{
+        width: 40vw !important;    
+        height: 55vh !important;
+    }
+    #p-photo{
+        width: 11vmin !important;
+        height: 11vmin !important;
+    }
+}
+@media (max-width: 600px){
+    #profile-container{
+        width:  $container-3-media-width;
+        height: $container-3-media-height;
+    }
+    .p-section-edits-popup-container{
+        width: 60vw !important;    
+        height: 70vh !important;
+    }
+    #p-photo{
+        width: 12vmin !important;
+        height: 12vmin !important;
+    }
+}
+@media (max-width: 500px){
+    #profile-container{
+        width:  $container-4-media-width;
+        height: $container-4-media-height;
+    }
+    #p-photo{
+        width: 13vmin !important;
+        height: 13vmin !important;
+    }
+}
+@media (max-width: 450px){
+    #profile-container{
+        width:  $container-5-media-width;
+        height: $container-5-media-height;
+    }  
+    #p-photo{
+        width: 16vmin !important;
+        height: 16vmin !important;
+    }
+}

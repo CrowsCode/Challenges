@@ -1,0 +1,296 @@
+@import '../styles/all';
+
+
+ 
+nav{
+  width: auto;
+  height:  $nav-height;
+
+  overflow: hidden;
+  //logo ka ba width dam nawa boya height akai zora ka auto ya bama bashakai ka karigari bo hover nabe
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: $secondary-color-dark4;
+  color: white;
+}
+
+
+////
+#check-button{
+  display: none;
+}
+#check-label{
+  flex-grow: 2;
+  display: none;
+
+  cursor: pointer;
+
+  
+  font-size: 7vh;
+  color: $secondary-color-logo-menu-dropdown;
+}
+////
+
+////
+#mobile-menu{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: $secondary-color-normal1;
+  .mobile-menu-element{
+    display: none;
+
+    cursor: pointer;
+    margin-bottom: 6vh;
+    text-decoration: none;
+
+    font-family: 'Concert One', cursive;
+    font-size: 4vh;
+    font-weight: bold;
+    color: $secondary-color-bright1;
+  }
+}
+////mobile-menu
+
+////
+#left-nav{
+  flex-grow: 3;
+
+  padding-left: 2%;
+  text-decoration: none;
+  
+  display: flex; 
+  justify-content:flex-start;
+  align-items: center;
+
+  transition: all 0.2s linear 0s;
+
+  #left-nav-logo{
+    width: 20vh;
+
+    color: $secondary-color-title;
+ 
+    &:hover{
+
+      color: $secondary-color-light1;
+  
+      transform: scale(1.02);
+      transition: all 0.2s linear 0s;
+    }
+  }
+}
+////left-nav
+
+////
+#right-nav{
+  flex-grow: 1;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+
+
+
+  .nav-element{
+   
+    margin-right: 3vh;
+    text-decoration: none; //underline
+    list-style: none; //style 'dot'
+
+    font-family: 'Concert One', cursive;
+    font-size: 2.8vh;
+    color: $secondary-color-bright1;
+    font-weight: bold;
+
+    transition: all 0.2s linear 0s;
+    &:hover{
+      box-shadow: 0px 5px 40px -10px rgba($secondary-color-light1, 0.26);
+
+      color: $secondary-color-light1;
+
+      transform: scale(1.05);
+      transition: all 0.2s linear 0s;
+    }
+  } 
+}
+
+#right-nav-account{
+  width: 40%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#right-nav-profile{
+  width: 50%;
+
+  border-radius: 20% ;
+  text-decoration: none;
+
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  color: $secondary-color-normal2;
+
+  transition: all 0.2s linear 0s;
+  &:hover{
+    color: $secondary-color-light1;
+
+    transform: scale(1.03);
+    transition: all 0.2s linear 0s;
+  }
+
+  img{
+    width: 8vh;
+    height: 8vh;
+
+    border-radius: 50%;
+    text-decoration: none;
+  }
+  #right-nav-profile-name-level{
+    padding-left: 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    text-decoration: none;
+    
+    font-size: 1.8vh;
+    font-weight: bold;
+    //#right-nav-profile-name{  }
+    #right-nav-profile-level-stuff{
+      #right-nav-profile-level{ 
+        color: $secondary-color-normal1; 
+      }
+      #right-nav-profile-level-progress{
+        width: 100%;
+      }
+    }
+  }
+  
+}
+
+
+
+
+#right-nav-settings{
+  width: 5vw;// baqadar width'i ''#right-nav-dropdown-elements''
+  height: $nav-height;
+
+  display: flex;
+  text-align: center; 
+  align-items: center;
+
+
+ 
+  #right-nav-settings-icon{  //Link la background 'a' ya
+    width: 100%;
+
+    font-size: 6vh;
+    color: $secondary-color-title;
+    transition: all 0.2s linear 0s;
+    &:hover{ 
+      color: $secondary-color-light1;
+      transition: all 0.2s linear 0s;
+    }
+  }
+  &:hover #right-nav-dropdown-elements{
+    display: block;  
+  }
+  #right-nav-dropdown-elements{ 
+    display: none;
+
+    position: absolute;//relative ba top'i window ka
+    top: $nav-height;  //ba peyi height'i nav'a
+    right: 0; //magic//wai le aka la lai rast be
+
+    width: 10vw;
+    box-shadow: 0px 8px 16px 0px $secondary-color-dark4;
+
+    #right-nav-dropdown-element-logout, #right-nav-dropdown-element-darkMode{//logout && darkmode
+      display: block;
+
+      width: 100%;
+      padding: 12px 16px;
+
+      cursor: pointer;
+      
+      background-color: $secondary-color-dark4;
+
+      font-size: 2vh;
+      font-weight: bold;
+      color: $secondary-color-light1;
+      &:hover{
+        color: $secondary-color-dark4;
+        background-color: $secondary-color-light1;
+      }
+    }
+    #right-nav-dropdown-element-darkMode{
+      position: relative;
+      #right-nav-dropdown-element-darkMode-hint{
+        display: none;
+      
+        position: absolute;
+        left: 0;
+        bottom: -50%;
+      
+        text-align: center;
+        color: rgba($secondary-color-light2, 0.6);
+        font-size: 1.5vmin;
+        font-size: clamp(1.5vmin, 12px, 1.7vmin);
+      }
+      &:hover    #right-nav-dropdown-element-darkMode-hint{
+        display: block;
+      }
+    }
+  }
+}
+////right-nav
+
+
+
+
+
+@media  (max-width: 1000px) {
+  #right-nav{
+    display: none;
+  }
+  #mobile-menu{
+    position: fixed;
+    top: $nav-height;
+    left: -100%;
+
+    width: 100%;
+    height: 100vh;
+
+    z-index: 2;// bo awai saru 1 akakanish be
+   
+    transition: all linear 0.1s;
+    .mobile-menu-element{
+      display: block;
+    }
+  }
+
+
+  #check-label{
+    margin-right: 10px;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  #check-button:checked ~ #mobile-menu{
+    left: 0;
+  }
+}

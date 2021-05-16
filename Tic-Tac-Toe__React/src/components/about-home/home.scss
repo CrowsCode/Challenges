@@ -1,0 +1,91 @@
+@import '../styles/all';
+
+
+
+
+#home-container{
+    width: $container-width;
+    height: $container-height;
+    margin: 3vh auto 0 auto;
+
+    border-radius: 25px;
+
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+   @include box-shadow ($secondary-color-container, $secondary-color-dark4);
+} 
+#home-title-container{
+ 
+    padding: 1% 3%;
+    
+    border-radius: 50px;
+
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+
+    @include box-shadow-inverse ($secondary-color-bright2, $secondary-color-dark4, 0.3);
+
+    #home-title{
+       
+        font-size: 5vmin;
+        font-size: clamp(5vmin, 45px, 5.5vmin);
+        font-weight: bolder;
+        font-family: 'Concert One', cursive;
+    }
+}
+
+#home-box{
+    width: 80%;
+    height: 75%;
+
+    border-radius: 25px;
+
+    display: flex;
+    justify-content: center;
+
+    @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4);
+
+    #text-home{
+        margin: 0 10%;
+        font-size: 40vmin;
+    
+
+    }
+}
+
+
+////////////////////////
+@media (max-width: 800px){
+    #home-container{
+        width:  $container-1-media-width;
+        height: $container-1-media-height;
+    }
+}
+@media (max-width: 700px){
+    #home-container{
+        width:  $container-2-media-width;
+        height: $container-2-media-height;
+    }
+}
+@media (max-width: 600px){
+    #home-container{
+        width:  $container-3-media-width;
+        height: $container-3-media-height;
+    }
+}
+@media (max-width: 500px){
+    #home-container{
+        width:  $container-4-media-width;
+        height: $container-4-media-height;
+    }    
+}
+@media (max-width: 450px){
+    #home-container{
+        width:  $container-5-media-width;
+        height: $container-5-media-height;
+    }  
+}

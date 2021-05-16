@@ -1,0 +1,138 @@
+@import '../styles/all';
+
+
+
+
+#leaderBaord-container{
+    width: $container-width;
+    min-height: $container-height;
+
+    margin: 5vh auto  5vh auto;
+
+    border-radius: 25px;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include box-shadow ($secondary-color-container, $secondary-color-dark4, 0.3);
+}
+
+
+ 
+#header-container{
+    background-color: $secondary-color-bright1;
+    border-radius: 50px 50px 0 0;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 120%; //overflow hidden m krdua bo container aka
+    height: 5vmin;
+    font-size: 3vmin;
+
+    @include box-shadow-inverse ($secondary-color-bright1, $secondary-color-dark4, 0.4);
+    
+    
+    .header-text{
+        font-family: 'Concert One', cursive;
+        font-weight: bolder;
+    }
+}
+ 
+.userInfo-container{
+    width: 90%;
+    height: 6vmin;
+ 
+    margin: 2vmin 0;
+
+    border-radius: 50px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+    @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.5);
+
+
+    .userInfo-photo-and-name{
+        padding: 0.5% 1%;
+        padding-right: 2%;
+
+        border-radius: 50px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        
+        @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.5);
+        text-decoration: none;
+       .userInfo-photo{
+            width: 4vmin;
+            height: 4vmin;
+
+            border-radius: 50%;
+        }
+        .userInfo-name{
+            margin-left: 0.5vmin;
+
+            font-size: 2.5vmin;
+            font-size: clamp(2.5vmin, 13px, 3vmin);
+            color: rgb(190, 183, 183);
+        }
+    }
+    
+    .userInfo-location{
+        width: 20%;
+        
+        color: $secondary-color-bright2;
+        font-size: 3vmin;
+        font-size: clamp(3vmin, 14px, 4vmin);
+        text-align: center;
+    }
+    .userInfo-level{
+        width: 20%;
+
+        color: $secondary-color-bright2;
+        font-size: 3vmin;
+        font-size: clamp(3vmin, 14px, 4vmin);
+        text-align: center;
+    }
+}
+
+
+////////////////////////
+@media (max-width: 800px){
+    #leaderBaord-container{
+        width:  $container-1-media-width;
+        min-height: $container-1-media-height;
+    }
+}
+@media (max-width: 700px){
+    #leaderBaord-container{
+        width:  $container-2-media-width;
+        min-height: $container-2-media-height;
+    }
+}
+@media (max-width: 600px){
+    #leaderBaord-container{
+        width:  $container-3-media-width;
+        min-height: $container-3-media-height;
+    }
+}
+@media (max-width: 500px){
+    #leaderBaord-container{
+        width:  $container-4-media-width;
+        min-height: $container-4-media-height;
+    }
+    
+}
+@media (max-width: 450px){
+    #leaderBaord-container{
+        width:  $container-5-media-width;
+        min-height: $container-5-media-height;
+    }  
+}

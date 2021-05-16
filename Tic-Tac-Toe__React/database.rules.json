@@ -1,0 +1,25 @@
+{
+  "rules": {
+   "allNameAndUIDs" :{
+          ".write": "auth.uid !== null",
+           ".read": "true"
+     },
+     "users": {
+       ".read": "true",
+       "$uid": {
+         "userInfo" :{
+            ".write": "$uid === auth.uid",
+           ".read": "true"
+         },
+         "gameResults" :{
+           ".write": "$uid === auth.uid",
+           ".read": "true"
+         },
+         "currentGame" :{
+           ".write": "$uid === auth.uid"
+         }
+       }
+     }
+   }
+ }
+ 

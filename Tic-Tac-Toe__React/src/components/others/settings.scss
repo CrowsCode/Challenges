@@ -1,0 +1,480 @@
+@import '../styles/all';
+
+
+
+
+
+
+#settings-container{
+    width: $container-width;
+    height: $container-height;
+    margin: 3vh auto 0 auto;
+    overflow: hidden;
+    
+    border-radius: 25px;
+
+    display: flex;
+    justify-content: space-evenly;
+
+    @include box-shadow ($secondary-color-container, $secondary-color-dark4, 0.3);
+}
+
+
+
+.hide {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important; //actually pewist nya har display none akre bas ama rega rastakaya
+ }
+////////////////////////
+.settings-title{
+
+    border-radius: 25px;
+    padding: 0.3vmin 2vmin;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 3vmin;
+    font-size: clamp(3vmin, 18px, 3.5vmin);
+
+    @include box-shadow-inverse (rgba($secondary-color-bright2, 0.4), $secondary-color-dark4, 0.4);
+}
+////////////////////////
+
+
+#general-settings{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+   
+    #dark-mode{
+        position: relative;
+
+        padding: 2vmin;
+        border-radius: 50px;
+
+        cursor: pointer;
+        border: none;
+        outline: none;
+
+        font-size: 2.5vmin;
+        font-size: clamp(2.5vmin, 16px, 3vmin);
+
+        transition: all 0.2s linear 0s;
+
+        @include box-shadow-inverse ($secondary-color-bright1, $secondary-color-dark4, 0.4);
+        
+        &:hover{
+            box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+            background-color: $secondary-color-container;
+            color: $secondary-color-light1;
+            transform: scale(1.01);
+            transition: all 0.2s linear 0s;
+        }
+
+        #dark-mode-hint{
+            display: none;
+
+            position: absolute;
+            bottom: -40%;
+    
+            text-align: center;
+            color: rgba($secondary-color-light2, 0.6);
+            font-size: 1.5vmin;
+            font-size: clamp(1.5vmin, 12px, 1.7vmin);
+        }
+        &:hover    #dark-mode-hint{
+            display: block;
+        }
+    }
+}
+
+
+#general-settings-stuff{
+    width: 90%;
+    height: 80%;
+
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-items: center;
+
+    @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);
+}
+////////////////////////
+#account-settings{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-items: center;
+}
+
+#account-settings-stuff{
+    width: 90%;
+    height: 80%;
+
+    border-radius: 15px; 
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly; 
+    align-items: center;
+
+    @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);
+
+    .s-section, .delete-s-section{
+        width: 90%;
+        height: 15%;
+        overflow: hidden;
+
+        border-radius: 15px;
+
+        @include box-shadow-inverse ($secondary-color-bright2, $secondary-color-dark4, 0.4);
+    }
+}
+
+ 
+
+
+.s-section-edits{
+    height: 30%;
+    padding: 3px 8px 0 8px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .s-check-button{
+        display: none;
+        outline: none;
+        &:checked ~ .s-section-edits-popup-background{
+            display: flex;
+        }
+        &:not(:checked) ~ .s-section-edits-popup-background{
+            display: none;
+        } 
+    }
+    .s-check-header-text{
+        font-size: 2.5vmin;
+        font-size: clamp(2.5vmin, 15px, 3vmin);
+    } 
+    .s-check-label{
+        font-size: 2.5vmin;
+        font-size: clamp(2.5vmin, 15px, 3vmin);
+        cursor: pointer;
+        
+        transition: all 0.2s linear 0s;
+        &:hover{
+            box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+            color: $secondary-color-light1;
+            transform: scale(1.01);
+            transition: all 0.2s linear 0s;
+        }
+    }
+    .s-section-edits-popup-background{
+        width: 100vw;
+        height: 100vh-$nav-height;
+        cursor: pointer;
+        z-index: 1;
+ 
+        position: absolute;
+        top: $nav-height;
+        left: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: rgba(black, 0.7);
+        .s-section-edits-popup-container{   
+            width: 25vw;
+            height: 40vh;
+ 
+            border-radius: 50px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around; 
+            align-items: center;
+             
+            @include box-shadow-inverse ($secondary-color-bright2, $secondary-color-dark4, 0.8);
+
+            .s-section-edits-popup-divs{
+                position: relative;
+
+                height: 60%;
+                width: 100%;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around; 
+                align-items: center;
+
+                #s-result-email,  #s-result-password,  #s-result-delete{
+                    position: absolute;
+                    bottom: -13%;
+                
+                    text-align: center;
+                
+                    font-size: 1.52vmin;
+                    font-size: clamp(1.2vmin, 10px, 1.5vmin);
+                    font-weight: bolder;
+                }
+                .s-section-edits-popup-div{
+                    position: relative;
+
+                    width: 80%;
+                    height: 100%; 
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly; 
+                    align-items: center;
+                    
+                    .s-hint{
+                        display: none;
+    
+                        position: absolute;
+                        bottom: -30%;
+                
+                        text-align: center;
+                        color: rgba($secondary-color-light2, 0.6);
+                        font-size: 1.5vmin;
+                        font-size: clamp(1.5vmin, 12px, 1.7vmin);
+                    }
+                    &:hover    .s-hint{
+                        display: block;
+                    }
+                    .s-section-edits-popup-label{
+                        font-size: 2.5vmin;
+                        font-size: clamp(2.5vmin, 15px, 3vmin);
+                    }
+                    .s-section-edits-popup-input{
+                        width: 100%;
+                        height: 35%;          
+                      
+                        padding-left: 5%;
+                        border-radius: 15px;
+                        outline: none;
+                    }
+                }
+            }
+            .s-section-edits-popup-buttons{
+                width: 80%;
+
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                .s-section-edits-popup-button-save, .s-section-edits-popup-button-close{
+                    padding: 2% 5%;
+                    border-radius: 50px;
+
+                    outline: none;
+                    font-size: clamp(3vmin, 18px, 3.5vmin);
+
+                    transition: all 0.2s linear 0s;
+
+                
+
+                    &:hover{
+                        box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+
+                        color: $secondary-color-light1;
+                        transform: scale(1.01);
+                        transition: all 0.2s linear 0s;
+
+                        @include box-shadow ($secondary-color-container, $secondary-color-dark4, 0.3);
+                    }
+                }
+                
+                .s-section-edits-popup-button-save{
+                    @include box-shadow (rgb(12, 131, 12), $secondary-color-dark4, 0.3);
+                }
+                .s-section-edits-popup-button-close{
+                    @include box-shadow (rgb(131, 23, 23), $secondary-color-dark4, 0.3);
+                }
+            }         
+        }
+    }
+}
+.s-section-display{
+    height: 100%;//overflow hidden a kesha nya//ama bo away ka display* aka ba tawawi fill ka
+    padding: 0 1.5vmin;
+
+    border-radius: 0 0 15px 15px;
+
+
+    font-size: 2.5vmin;
+    font-size: clamp(2.5vmin, 14px, 3vmin);
+
+    @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.4);
+}
+////////////////////////
+.delete-s-section{//chak f ed up bwa ama
+  
+  
+    width: auto !important;
+    height: auto !important;
+
+    padding: 1% 3% !important;
+    border-radius: 15px !important;
+
+    background-color: red !important;
+    @include box-shadow-inverse (red, $secondary-color-dark4, 0.4);
+
+    .s-section-edits{
+        width: 100%;
+        height: 100%;
+        .s-check-label{
+            width: 100%;
+            height: 100%;
+
+            font-size: 2.5vmin;
+            font-size: clamp(2.5vmin, 16px, 3vmin);
+            text-align: center;
+            margin-right: 10%;
+        }
+    } 
+    transition: all 0.2s linear 0s;
+    &:hover{
+        box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+        background-color: $secondary-color-container !important;
+    
+        transition: all 0.2s linear 0s;
+    }
+}
+////////////////////////
+
+#verification{
+    position: relative;
+
+    padding: 1% 5%;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.4);
+
+    #verification-text{
+        font-size: 2.5vmin;
+        font-size: clamp(2.5vmin, 16px, 3vmin);
+    }
+    #verification-verified-text{
+        margin-left: 3%;
+
+        border-radius: 50px;
+
+        color: $secondary-color-bright1;
+        font-size: 2vmin;
+        font-size: clamp(2vmin, 14px, 2.5vmin);
+
+        @include box-shadow ($secondary-color-dark4, $secondary-color-dark4, 0.4);
+    }
+    #send-verification-button{
+        margin-left: 3%;
+        padding: 2%;
+
+        outline: none;
+        border: none;
+
+        border-radius: 15px;
+        transition: all 0.2s linear 0s;
+
+        @include box-shadow-inverse ($secondary-color-bright1, $secondary-color-dark4, 0.6);
+
+        &:hover{
+            box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+            background-color: $secondary-color-container;
+            color: $secondary-color-light1;
+            transform: scale(1.01);
+            transition: all 0.2s linear 0s;
+        }
+    }
+}
+////////////////////////
+@media (max-width: 900px){
+    #settings-container{
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    #account-settings{
+        height: 60%;
+    }
+    #general-settings{
+        height: 35%;
+        #general-settings-stuff{
+            height: 70%;
+        }
+    }
+
+    #account-settings-stuff{
+        width: 95% !important;
+       
+    }
+    .s-section{
+        height: 25% !important;
+    }
+    .delete-s-section{
+        height: 10% !important;
+    }
+}
+
+
+@media (max-width: 800px){
+    #settings-container{
+        width:  $container-1-media-width;
+        height: $container-1-media-height;
+    }
+    .s-section-edits-popup-container{
+        width: 35vw !important;    
+        height: 50vh !important;
+    }
+}
+@media (max-width: 700px){
+    #settings-container{
+        width:  $container-2-media-width;
+        height: $container-2-media-height;
+    }
+    .s-section-edits-popup-container{
+        width: 40vw !important;    
+        height: 55vh !important;
+    }
+}
+@media (max-width: 600px){
+    #settings-container{
+        width:  $container-3-media-width;
+        height: $container-3-media-height;
+    }
+    .s-section-edits-popup-container{
+        width: 60vw !important;    
+        height: 70vh !important;
+    }
+}
+@media (max-width: 500px){
+    #settings-container{
+        width:  $container-4-media-width;
+        height: $container-4-media-height;
+    }
+    
+}
+@media (max-width: 450px){
+    #settings-container{
+        width:  $container-5-media-width;
+        height: $container-5-media-height;
+    }
+}
+

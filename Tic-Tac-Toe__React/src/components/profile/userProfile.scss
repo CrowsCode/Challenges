@@ -1,0 +1,358 @@
+@import '../styles/all';
+
+$name-bio-gender-location-width: 55%;
+$photo-level-gameResults-width: 35%;
+
+
+
+
+
+
+///////////////////////////////////////////
+#userProfile-container{
+    width: $container-width;
+    height: $container-height;
+
+    margin: 3vh auto 0 auto;
+
+    border-radius: 25px;
+
+    display: flex;
+    justify-content: space-evenly;
+
+ 
+    @include box-shadow ($secondary-color-container, $secondary-color-dark4, 0.3);
+}
+
+
+///////////////////////////////////////////////////
+#name-bio-gender-location{
+    width: $name-bio-gender-location-width;
+    height: 85%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-items: center;
+    .u-section, .u-section-bio{
+        width: 100%;
+        height: 15%;
+
+        overflow: hidden;
+
+        border: 2px solid  black;
+        border-radius: 15px;
+      
+        @include box-shadow-inverse ($secondary-color-bright2, $secondary-color-dark4, 0.4);
+
+        .u-section-header{
+            height: 30%;
+
+            padding-left: 5%;
+
+            font-size: 2.5vmin;
+            font-size: clamp(2.5vmin, 15px, 3vmin);
+        }
+        .u-section-display,.u-section-display-bio{
+            height: 100%;//overflow hidden a kesha nya//ama bo away ka display* aka ba tawawi fill ka 
+            padding: 0 1.5vmin;
+        
+            border-radius: 0 0 15px 15px;
+           
+            font-size: 2.5vmin;
+            font-size: clamp(2.5vmin, 14px, 3.5vmin);
+
+            @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.4);
+        }
+    }
+    .u-section-bio{
+        height: 20%;
+        .u-section-display-bio{
+            font-size: 2vmin;
+            font-size: clamp(2vmin, 11px, 3vmin) !important;
+        }
+    }
+}
+///////////////////////////////////////////////////
+#u-photo-level-gameResults{
+    width: $photo-level-gameResults-width;
+    height: 85%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly; 
+    align-items: center; 
+} 
+#u-photo-stuff{  
+    width: 100%;
+    height: 30%;
+
+    border: 2px solid black;
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly; 
+    align-items: center;
+
+
+    @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.4);
+
+    #u-photo{
+        width: 15vmin;
+        height: 15vmin;
+
+        border: 2px solid black;
+        border-radius: 50%;
+    }
+}
+
+#u-level-stuff{
+    position: relative;
+
+    width: 100%;
+    height: 15%;
+
+    border: 2px black solid;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-content: center;
+    
+    font-size: 2vmin;
+    font-size: clamp(2vmin, 12px, 3vmin);
+
+    @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.4);
+
+    #u-level-text{
+        text-align: center;
+
+        #u-level-beforeText{
+            font-weight: bold;
+        }
+        #u-level{
+            color: $secondary-color-bright2;
+            font-weight: bolder;
+        }
+    }  
+    #u-level-progressBar{   
+        position: relative;
+
+        width: 80%;
+        height: 30%;
+        margin: 0 auto;
+
+        overflow: hidden;
+        
+        border-radius: 15px;
+    
+        @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.3);
+
+        #u-level-progressBar-value{
+            height: 100%; 
+            width: 100%;
+
+            border-radius: 15px 0 0 15px;
+
+            background-color: green;
+        }
+        #u-level-progressBar-value-text{
+            position: absolute;
+            top: 10%;//rezhai height
+            left: 0;
+            right: 0;
+
+            text-align: center;
+            font-size: 2vmin;
+            font-size: clamp(2vmin, 12px, 3vmin);
+        }
+    }
+    #u-level-hover{
+        display: none;
+
+        position: absolute;
+        left: 50%;
+        bottom: -30%;
+        transform: translate(-50%);
+
+        padding: 1% 10%;
+        border-radius: 25px;
+
+        text-align: center;
+
+        @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.8);
+        
+        #u-level-hover-percentage{
+            font-size: 2vmin;
+            font-size: clamp(2vmin, 12px, 3vmin);
+        }
+    }
+    &:hover #u-level-hover{
+        display: block;
+    }
+} 
+      
+
+  
+
+
+#u-gameResults{
+    position: relative;
+    
+    width: 100%;
+    height: 35%;
+
+
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-items: center;
+
+    @include box-shadow-inverse ($secondary-color-normal2, $secondary-color-dark4, 0.4);
+
+    .u-gameResults-gameType{
+        width: 90%;
+        height: 40%;
+
+        //border: 1px solid black;
+        border-radius: 15px;
+       
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around; 
+        align-items: center;
+
+        background-color:  $secondary-color-normal1;
+        @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);
+
+        .u-gameType-text{
+            font-size: 2vmin;
+            font-size: clamp(2vmin, 12px, 3vmin);
+            text-align: center;
+        }
+        .u-gameType-progressBar-and-stats{
+            width: 100%;
+            height: 40%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
+            align-items: center;
+            .u-gameType-progressBar{
+                width: 80%;
+                height: 50%;
+
+                border-radius: 15px;
+
+                @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.4);
+            }
+            .u-gameType-stats{
+                width: 90%;
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                font-size: 1.5vmin;
+                font-size: clamp(1.5vmin, 10px, 2.5vmin);
+                align-items: center;
+                .u-gameType-stats-gamesWon{
+                    color: #028502;
+                }
+                .u-gameType-stats-gamesDraw{
+                    color: #aca001;
+                }
+                .u-gameType-stats-gamesLost{
+                    color: #8d0009;
+                }
+            }
+            .u-gameType-percentages-hover{
+                width: 40%;
+
+                display: none;
+
+                position: absolute;           
+                left: 50%;
+                bottom: -20%;
+                transform: translate(-50%);
+                
+                padding: 2% 10%;
+
+                //border: 1px solid black;
+                border-radius: 25px;
+
+             
+                font-size: 2vmin;
+                font-size: clamp(2vmin, 12px, 3vmin);
+                text-align: center;
+
+                @include box-shadow-inverse ($secondary-color-normal1, $secondary-color-dark4, 0.8);
+
+                .u-gameType-percentages-gamesWon{
+                    color: #028502;
+                }
+                .u-gameType-percentages-gamesDraw{
+                    color: #aca001;
+                }
+                .u-gameType-percentages-gamesLost{
+                    color: #8d0009;
+                }
+            }
+            &:hover .u-gameType-percentages-hover{
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;   
+            }          
+        } 
+    }
+}
+
+
+////////////////////////
+@media (max-width: 800px){
+    #userProfile-container{
+        width:  $container-1-media-width;
+        height: $container-1-media-height;
+    }
+    .p-section-bio{
+        height: 30% !important;
+    }
+}
+@media (max-width: 700px){
+    #userProfile-container{
+        width:  $container-2-media-width;
+        height: $container-2-media-height;
+    }
+    #u-photo{
+        width: 18vmin !important;
+        height: 18vmin !important;
+    }
+}
+@media (max-width: 600px){
+    #userProfile-container{
+        width:  $container-3-media-width;
+        height: $container-3-media-height;
+    }
+}
+@media (max-width: 500px){
+    #userProfile-container{
+        width:  $container-4-media-width;
+        height: $container-4-media-height;
+    }
+}
+@media (max-width: 450px){
+    #userProfile-container{
+        width:  $container-5-media-width;
+        height: $container-5-media-height;
+    }  
+    #u-photo{
+        width: 20vmin !important;
+        height: 20vmin !important;
+    }
+}
