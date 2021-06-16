@@ -1,4 +1,3 @@
 # Projects
 
-
-Hii
+These are my personal finished projects.
