@@ -415,7 +415,14 @@ $_SESSION['user']['role'] == "Admin"; //deleteewe
             for (let i = 0; i < passedArray.length; i++) {
                 if (passedArray[i]["approved"] == "1") {
                     let coordinate = passedArray[i]["coordinate"].split(':')
-                    marker = new L.marker([coordinate[0], coordinate[1]]).addTo(map);;
+                    var icon = L.icon({
+                        iconUrl: "./assets/img/default.png",
+                        iconSize: [75, 50]
+                    });
+
+                    marker = new L.marker([coordinate[0], coordinate[1]], {
+                        icon: icon
+                    }).addTo(map);;
 
 
                     popupContent = document.createElement("div");
