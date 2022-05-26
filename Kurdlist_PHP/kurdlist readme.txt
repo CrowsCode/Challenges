@@ -1,0 +1,1 @@
+kate ka users nabe la database yakam kas ba nawi admin twanai admini pe adre
