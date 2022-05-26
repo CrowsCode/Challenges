@@ -1,5 +1,5 @@
-
-
+Third stage web development mobile responsive website made using PHP/mySQl.
+The idea behind this webiste is to help everyone find and add destination/picnic spots to a public map which each addition will need admin's approval.
 
 <img src="screenShots/1.jpg" width="75%">
 
