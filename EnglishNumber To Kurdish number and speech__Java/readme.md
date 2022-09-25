@@ -1,4 +1,4 @@
-A simple java program where you enter numbers in English (example 122) to get the Kurdish equivelance( sad u bist u dw) voiced out. 
+A simple java program where you enter numbers in English (example 122) to get the Kurdish equivalence ( sad u bist u dw) voiced out. 
 
 
 
