@@ -1,0 +1,56 @@
+-----------------------------------
+BAKARM NAHENAWA BAS BO HAMU JORA WEBSITE'EK ISH AKA
+bo login ba fb app secret u app id awe  >>  https://developers.facebook.com/apps/1402710043269464/settings/basic/  
+ wa abe lam linka la ""Valid OAuth Redirect URIs"" aw url a dabnre ka la firebase kate facebook auth enable akai adate daneyi >>  https://developers.facebook.com/apps/1402710043269464/fb-login/settings/
+-----------------------------------
+
+const useStyles = makeStyles((theme) => ({
+  link_others: {
+    color: theme.palette.secondary.light,
+  },
+  button_other: {
+    backgroundColor: 'white',
+  
+  },
+  image_small: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  },
+  other_siginin_text: {
+    color: 'rgb(116,116,116)'
+  }
+}));
+
+var google_provider = new firebase.auth.GoogleAuthProvider();
+var facebook_provider = new firebase.auth.FacebookAuthProvider();
+function googleSignin() {
+firebase.auth().useDeviceLanguage();
+firebase.auth().signInWithRedirect(google_provider);
+}
+
+function facebookSignin() {
+firebase.auth().useDeviceLanguage();
+firebase.auth().signInWithRedirect(facebook_provider);
+}
+
+<Grid style={{marginTop: '25px'}} container spacing={1}>
+
+    <Grid item xs={12}> 
+        <Button className={classes.button_other} fullWidth  variant="contained"  color="primary"  onClick = {() => {googleSignin()}}>
+        <Grid  container  direction="row"  justify="space-between"  alignItems="center" >
+            <Avatar className={classes.image_small} alt="Google Symbol" src={require("./images/g.jpg")} />
+            <Typography  className={classes.other_siginin_text}>Sign in with Google</Typography>
+        </Grid>
+        </Button>
+    </Grid>
+
+    <Grid item xs={12}>
+        <Button className={classes.button_other} fullWidth  variant="contained"  color="primary"  onClick = {() => {facebookSignin()}}>
+        <Grid  container  direction="row"  justify="space-between"  alignItems="center" >
+            <Avatar className={classes.image_small} alt="Google Symbol" src={require("./images/f.png")} />
+            <Typography  className={classes.other_siginin_text}>Sign in with Facebook</Typography>
+        </Grid>
+        </Button>
+    </Grid>
+
+</Grid>
