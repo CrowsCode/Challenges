@@ -1,5 +1,4 @@
-An unfinished project because of the client's change request, which is why this is public instead of private. It lets user refill their balance by buying codes and redeeming them, the user could then buy listed online services previously added by the website owner.
-
+This project remains unfinished due to a change request from the client, which is why it is public instead of private. It allows users to refill their balance by purchasing codes and redeeming them. Users can then use the balance to buy online services listed by the website owner.
 <img src="screenShots/1.png" width="75%">
 <img src="screenShots/2.png" width="75%">
 <img src="screenShots/3.png" width="75%">

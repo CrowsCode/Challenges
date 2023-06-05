@@ -1,4 +1,4 @@
-A simple React and Firebase website, where users can add orders by providing phone number and description. Users could also delete orders (when they are done or canceled) or could search through them using search bar. 
+A simple React and Firebase website where users can add orders by providing a phone number and description. Users can also delete orders (when they are done or canceled) and search through them using a search bar.
 
 https://gonaorders.firebaseapp.com/
 

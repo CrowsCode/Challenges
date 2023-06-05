@@ -1,6 +1,4 @@
-An Alternative version of Tic-Tac-Toe. Where one can create accounts, have profiles with levels and play games against a computer or another person next to them.
-Board size and many other features could be customized by the players.
-Created using React, sassy CSS, and firebase.
+An alternative version of Tic-Tac-Toe where users can create accounts, have profiles with levels, and play games against a computer or another person. Players can customize the board size and many other features. The game is created using React, Sass CSS, and Firebase.
 
 https://baleno-c9fc8.web.app/
 One has to create an account to be able to play.
