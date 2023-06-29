@@ -1,0 +1,183 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  font-size: 2.5vh;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #2b2e4a;
+
+  
+}
+
+
+#img-and-buttons{
+  margin-top: 9vh;
+
+  width: 70%;
+  height: 60vh;
+
+  margin-bottom: 1vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  // color: #903749;
+
+  #buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 50%;
+    
+    color: #e84545;
+    #buttons-image-and-upload{
+      font-size: 3vmin;
+      color:  #ffcc57;
+      border: #ffcc57 1px solid;
+      padding:  2px 20px;   
+      border-radius: 25px;
+      background-color: #53354a;
+
+      font-family: 'Bebas Neue', cursive !important;
+    }
+  }
+  #image-container{
+    overflow: auto;   //ama lagal background-size: contain; bakar be
+    width: 100%;
+    height: 90%;
+
+    background-color: #53354a;
+
+    #image{
+   
+      background-image: url("../images/img.jpg");
+      width: 100%;
+      height: 98.8%;
+      background-position: bottom center;
+      background-size: cover;//contain daima hamui psahn aya
+      background-repeat: no-repeat;
+      
+    }
+  }
+
+}
+
+@media only screen and (max-width: 600px) {
+  #img-and-buttons{
+    #buttons{ 
+      #buttons-image-and-upload{ 
+      }
+    }
+    #image-container{
+    
+      #image{
+     
+      }
+    }
+  
+  }
+}
+
+
+
+#rotate-and-size{
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+  
+  width: 50%;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 1vh;
+}
+
+
+
+
+#sidebar-and-slider{
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  color: #e84545 !important;
+
+  // margin-bottom: 1vh;
+ 
+  #filters{
+    width: 60%;
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+ 
+    .filters-button{
+    
+      border-radius: 15px;
+      padding: 10px 20px;
+      outline: none;
+
+      font-size: 2vh;
+
+      background-color: #53354a;
+      color: #e84545;
+      
+    }
+    .filters-button:hover{
+      transform: scale(1.1);
+      background-color: #ffcc57;
+      color: #903749;
+    }
+  }
+  #slider-container{
+    width: 60%;
+    padding: 2vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #slider{
+      width: 100%;
+      cursor: pointer;
+      -webkit-appearance: none;
+      background-color: #53354a;
+
+    }
+    #slider:focus {
+      outline: none; 
+    }
+    #slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      background: #e84545;
+
+      border: 1px solid #000000;
+      height: 36px;
+      width: 16px;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-top: -14px; 
+    }
+    #slider::-webkit-slider-thumb:active, #slider::-webkit-slider-thumb:hover  {
+      -webkit-appearance: none;
+      background: #ffcc57;
+      transform: scale(1.1);
+    }
+  }
+}
+

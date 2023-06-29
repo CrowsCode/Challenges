@@ -1,0 +1,147 @@
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+}
+body {
+    font-size: 2.5vh;
+}
+///////////
+#contactUs-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  
+    min-height: 100vh;
+    width: 100vw;
+    background-color: #2b2e4a;
+
+}
+
+#middle{
+    margin-top: 12vh;
+
+    background-color: #53354a;
+    width: 65%;
+    height: 75vh;
+
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    // align-items: center;
+
+    
+    #left{
+        border-radius: 10px 0 0 10px;
+
+        width: 40%;
+        height: 100%;
+    }
+    #right{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        height: 90%;
+        width: 60%;
+
+        margin: 0 7vmin;
+        #right-title{
+            font-family: 'Bebas Neue', cursive;
+            font-size: 10vmin;
+            color: #e84545 ;
+            color: #ffcc57;
+        }
+        #right-content{
+            font-family: 'Roboto', sans-serif;
+            font-size: 3vmin;
+            color: #cab47f;
+            
+        }
+        #loading-dot{
+
+            width:   15vmin;
+            height:   15vmin;
+
+            border-radius: 100%;
+            
+            animation-name: dot;
+            animation-timing-function: ease;   
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-direction: reverse;   
+            // background-color: $secondary-color-normal2;
+            // animation-direction: alternate; 
+        }
+    }
+}
+
+#footer{
+    height: 7vh;
+    width: 100%;
+    background-color: #53354a;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    #icons{
+        width: 20%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .social-icon{
+        
+            .social-icon-img{
+                width: 5vmin;
+            }
+        }
+    }
+}
+
+/////////////  
+
+        
+
+/////////////
+
+@keyframes dot {
+    0%  {    }
+    25% {    }
+    50% {
+            left:calc( 100% - 10vmin);  
+            top: calc( 100% - 10vmin);
+            transform:rotate(360deg);
+            -moz-transform: rotate(360deg);
+            -webkit-transform: rotate(360deg);
+        }
+    75% {    }
+    100%{
+            left:0px; 
+            top:0px;
+            transform:rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+        }
+}//akre rotate aka 1 jar ahr 3 ki bnusm la 100% ka u degreyaka 720 be 
+
+
+
+//////
+ @media only screen and (max-width: 850px) {
+    #middle{
+        width: 85%;
+    }
+    #form-transaction{
+      
+        margin: 3vh auto 0 auto;
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    #middle{
+        width: 95%;
+    }
+  }
