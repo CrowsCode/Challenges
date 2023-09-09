@@ -1,10 +1,10 @@
-The website is designed to help users find and contribute to a public map of destination and picnic spots. Users can add new spots to the map, but each addition requires approval from an admin before it becomes publicly visible.
+The website is designed to help users find and contribute to a public map of destinations and picnic spots. Users can add new spots to the map, but each addition requires approval from an admin before it becomes publicly visible.
 
 Key features of the website include:
 
 1. User Registration and Authentication: Users can create an account and log in to access the website's features.
 
-2. Map Integration: The website includes a map that displays existing destination and picnic spots. Users can interact with the map, zoom in/out, and explore different locations.
+2. Map Integration: The website includes a map that displays existing destinations and picnic spots. Users can interact with the map, zoom in/out, and explore different locations.
 
 3. Spot Submission: Registered users can submit new destination or picnic spots by providing relevant details such as name, description, location coordinates, and any additional information.
 
@@ -17,8 +17,6 @@ Key features of the website include:
 7. Mobile Responsiveness: The website is designed to be responsive and accessible across various devices, ensuring a seamless user experience on mobile phones, tablets, and desktops.
 
 8. User Profile: Each user has a profile page where they can view and manage their submitted spots, reviews, and other relevant information.
-
-The PHP programming language is used to handle server-side operations, while MySQL is used as the database to store spot details, user information, and admin approvals. The website's design and layout are optimized for mobile devices, allowing users to access and contribute to the public map easily.
 
 <img src="screenShots/1.jpg" width="75%">
 
